@@ -1,0 +1,1 @@
+serviceregistry mit spring cloud
