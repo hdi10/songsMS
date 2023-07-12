@@ -1,0 +1,1 @@
+entweder minimalrest package structure oder core.damoain und port
