@@ -6,16 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="songs" />
+        <module name="apigateway" />
+        <module name="songmicroservice" />
+        <module name="zelkulonmicroservice" />
+        <module name="authmicroservice" />
+        <module name="serviceregistry" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="apigateway" target="17" />
+      <module name="authmicroservice" target="17" />
+      <module name="serviceregistry" target="17" />
+      <module name="songmicroservice" target="17" />
       <module name="songs" target="17" />
+      <module name="SongsZelkulon" target="17" />
+      <module name="zelkulonmicroservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="apigateway" options="-parameters" />
+      <module name="authmicroservice" options="-parameters" />
+      <module name="serviceregistry" options="-parameters" />
+      <module name="songmicroservice" options="-parameters" />
       <module name="songs" options="-parameters" />
+      <module name="zelkulonmicroservice" options="-parameters" />
     </option>
   </component>
 </project>
