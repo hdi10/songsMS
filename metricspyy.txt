@@ -1,0 +1,20 @@
+
+import requests
+import base64
+
+USER_ID = 1092893
+API_KEY = "glc_eyJvIjoiOTAwOTAzIiwibiI6InNvbmdzbXMiLCJrIjoiR3E0NWZ0Ym92MDVRVTE3SXI3MDlyNnVRIiwibSI6eyJyIjoicHJvZC1ldS13ZXN0LTIifX0="
+
+body = 'test,bar_label=abc,source=grafana_cloud_docs metric=35.2'
+
+response = requests.post('https://influx-prod-24-prod-eu-west-2.grafana.net/api/v1/push/influx/write',
+                         headers = {
+                           'Content-Type': 'text/plain',
+                         },
+                         data = str(body),
+                         auth = (USER_ID, API_KEY)
+)
+
+status_code = response.status_code
+
+print(status_code)
