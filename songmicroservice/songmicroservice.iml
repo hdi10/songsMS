@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="songmicroservice" value="7f3ce3e0-b3ee-4dc4-8af8-43db9413c28e" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
