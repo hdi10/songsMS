@@ -1,4 +1,4 @@
---DROP TABLE IF EXISTS song_list;
+/*--DROP TABLE IF EXISTS song_list;
 
 --CREATE TABLE IF NOT EXISTS usertable(user_id VARCHAR(20) PRIMARY KEY, password VARCHAR(20) NOT NULL, firstName VARCHAR(50) NOT NULL, lastName VARCHAR(50) NOT NULL, token VARCHAR(100) NULL);
 
@@ -22,3 +22,4 @@ INSERT INTO song_list (is_private, user_id, name) VALUES (FALSE, 'maxime', 'Maxi
 INSERT INTO song_list (is_private, user_id, name) VALUES (TRUE, 'jane', 'JanesPrivate');
 INSERT INTO song_list (is_private, user_id, name) VALUES (FALSE, 'jane', 'JanesPrivate');
 
+*/
