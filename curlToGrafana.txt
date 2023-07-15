@@ -1,0 +1,4 @@
+API_KEY="1092893:glc_eyJvIjoiOTAwOTAzIiwibiI6InNvbmdzbXMiLCJrIjoiR3E0NWZ0Ym92MDVRVTE3SXI3MDlyNnVRIiwibSI6eyJyIjoicHJvZC1ldS13ZXN0LTIifX0="
+URL="https://influx-prod-24-prod-eu-west-2.grafana.net/api/v1/push/influx/write"
+
+curl -X  POST -H  "Authorization: Bearer $API_KEY" -H  "Content-Type: text/plain" "$URL" -d "test,bar_label=abc,source=grafana_cloud_docs metric=35.2"
