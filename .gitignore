@@ -197,3 +197,7 @@ zsdoc/data
 
 .bak.*
 .bak
+.secret
+.secret.*
+songsms.secret
+songsms.secret.*
