@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="authmicroservice" />
+          <factory-entry name="authmicroservice" value="167a0e2c-aa26-4572-aa56-b17adae8a8b9" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
