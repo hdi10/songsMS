@@ -18,4 +18,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query(value = "SELECT * FROM usertable WHERE user_id = ?1 AND password = ?2 AND token IS NOT NULL", nativeQuery = true)
     User authenticateByPasswordAndToken(String userId, String password);
+
+    @Query(value = "SELECT user_id FROM usertable WHERE token = ?1", nativeQuery = true)
+    User getUserByToken(String token);
+
+
 }
