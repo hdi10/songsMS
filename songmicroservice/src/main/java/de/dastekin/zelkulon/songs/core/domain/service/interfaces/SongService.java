@@ -3,5 +3,14 @@
  */
 package de.dastekin.zelkulon.songs.core.domain.service.interfaces;
 
-public class SongService {
+public interface SongService {
+
+    /**
+     * Look up if user is authenticated
+     * @return true if user is authenticated
+     */
+    Boolean authenticateUser();
+
+
+
 }
