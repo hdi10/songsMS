@@ -3,7 +3,10 @@ name: clean, build, test & package all projects
 # Action will run on each push
 on:
   push:
-    branches-ignore:
+    branches:
+      - main
+  pull_request:
+    branches:
       - main
 
 jobs:
