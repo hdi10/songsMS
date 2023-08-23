@@ -24,5 +24,8 @@ jobs:
     - name: Install Newman
       run: npm install -g newman
 
+    - name: List files (for debugging)
+      run: ls -R
+
     - name: Run Postman Collection
       run: newman run songsMS/_integrationtestsuite/PostmanSuite/new/SongsMS.postman_collection.json
