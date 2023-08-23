@@ -3,10 +3,7 @@ name: clean, build, test & package all projects
 # Action will run on each push
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
@@ -14,7 +11,7 @@ jobs:
     # define os, versions, ...
     strategy:
       matrix:
-        os: [ubuntu-18.04]
+        os: [ubuntu-latest]  # Changed from ubuntu-18.04
         java: [17]
     # run on os ...
     runs-on: ${{ matrix.os }}
