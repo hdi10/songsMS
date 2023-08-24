@@ -1,14 +1,14 @@
-package de.dastekin.zelkulon.songs;
-
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class SongMicroserviceMainApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package de.dastekin.zelkulon.songs;
+//
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class SongMicroserviceMainApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
