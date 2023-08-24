@@ -17,5 +17,14 @@
       <jdbc-url>jdbc:postgresql://ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d2jl3uvsrl3sv</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="authmicroservice/Hibernate" uuid="a8683aea-36b2-45a2-b8ce-82ec9b0fd300">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://    ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d2jl3uvsrl3sv</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
