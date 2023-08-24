@@ -1,6 +1,7 @@
 /**
  * Dastekin created on 21.07.2023 the SongList-Class inside the package - de.dastekin.zelkulon.songs.core.domain.model
- */
+ *//*
+
 package de.dastekin.zelkulon.songs.core.domain.model;
 import de.dastekin.zelkulon.auth.core.domain.model.User;
 import jakarta.persistence.*;
@@ -19,9 +20,11 @@ public class SongList {
   ////////////////////////////////////////////////////////////////////
     /////////////////////////// //TODO Relation ///////////////////////////
     ////////////////////////////////////////////////////////////////////
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     @ManyToOne
     //@JoinColumn(name="user_id")
     @JoinTable(name = "song_list",
@@ -33,9 +36,11 @@ public class SongList {
     @Column(name="is_private")
     private boolean isPrivate;
 
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "songs_list_song",
             joinColumns = @JoinColumn(name = "song_list_id"),
@@ -71,3 +76,4 @@ public class SongList {
         return song_list_id;
     }
 }
+*/
