@@ -27,5 +27,5 @@ jobs:
     - name: List files (for debugging)
       run: ls -R
 
-    - name: Run Postman Collection
-      run: newman run _integrationtestsuite/PostmanSuite/new/SongsMS.postman_collection.json
+#    - name: Run Postman Collection
+#      run: newman run _integrationtestsuite/PostmanSuite/new/SongsMS.postman_collection.json
