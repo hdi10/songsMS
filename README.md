@@ -26,13 +26,13 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
 The following table lists the endpoints for the Song API:
 
 | Basepath | HTTP Method | Endpoint | Query Patam |        Payload          | Description        |
-| :------- | :---------: |:---------|:-------------|-----------:|:-------------------|
+| :------- | :--------- |:---------|:-------------|:-----------|:-------------------|
 | /songsMS/rest/songs   |    GET   | /hello1   |   -   |     -           | Get a Greeting     |
-| /songsMS/rest/songs   |    GET      | /        |      |     -           | Get all songs      |
-| /songsMS/rest/songs   |    GET      | /{id}    |      |     -           | Get one song by ID |
-| /songsMS/rest/songs   |    POST     | /        | | [Song JSONObjekt](#song) | Add a new song     |
-| /songsMS/rest/songs   |    PUT      | /{id}    | | [Song ObjektJSON](#song) | Update a song      |
-| /songsMS/rest/songs   |   DELETE    | /{id}    |     |      -           | Delete a song      |
+| /songsMS/rest/songs   |    GET      | /        |   -  |     -           | Get all songs      |
+| /songsMS/rest/songs   |    GET      | /{id}    |   -  |     -           | Get one song by ID |
+| /songsMS/rest/songs   |    POST     | /        |-     | [Song JSONObjekt](#song) | Add a new song     |
+| /songsMS/rest/songs   |    PUT      | /{id}    | -    | [Song ObjektJSON](#song) | Update a song      |
+| /songsMS/rest/songs   |   DELETE    | /{id}    |  -   |      -           | Delete a song      |
 | /songsWS/rest |   POST  | /auth    | | [User JSONObjekt, String authHeader](#user)   |        authenticate user            |
 
 ## Test Request
