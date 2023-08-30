@@ -26,6 +26,8 @@
         <spring-cloud.version>2022.0.3</spring-cloud.version>
     </properties>
 
+    <!-- gateway -->
+    <!-- https://www.youtube.com/watch?v=KeZhT5pLn4c -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
