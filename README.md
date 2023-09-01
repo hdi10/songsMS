@@ -2,15 +2,15 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
 
 # Einleitung
 * Diese Projekt besteht aus drei Services
-    1. /auth
-    2. /songs & /songLists
-    3. /textanalyser
-* Discovery/Registry Service
-* API-Gateway
+    1. /auth PORT:9000
+    2. /songs & /songLists PORT:9010
+    3. /textanalyser PORT:9020
+* Discovery/Registry Service -> Eureka PORT:8090
+* API-Gateway PORT:8080
     
 # Gliederung
 
-## Service Discover/Resgistry Client and Server Registry
+## Service Discover/Registry Client and Server Registry
 
 ## APIGateway
 
