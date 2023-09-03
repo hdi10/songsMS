@@ -9,49 +9,21 @@ import jakarta.persistence.*;
  * Model class for Song
  */
 @Entity
-@Table(name = "songs")
+@Table(name = "songs")  //table vielleicht doch einfach nur Song nennen
 public class Song {
 
     @Id // kennzeichnet das Identitätsattribut entspricht dem PK (primary key)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // bedeutet, dass der PK automatisch durch die DB vergeben wird
     @Column(name = "id")
     private Integer id = null;
-
-    @Override
-    public String toString() {
-        return "Song{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
-                ", label='" + label + '\'' +
-                ", released='" + released + '\'' +
-                '}';
-    }
-
     private String title = null;
     private String artist = null;
     private String label = null;
     private Integer released = null;
 
-//    @ManyToMany(mappedBy = "songSet")
-//    @JoinColumn(name = "song_list_id")
-//    private SongList songList;
-//
-//    public SongList getSongList() {
-//        return songList;
-//    }
-
-    private Song(Builder builder) {
-        this.id = builder.id;
-        this.title = builder.title;
-        this.artist = builder.artist;
-        this.label = builder.label;
-        this.released = Integer.valueOf(builder.released);
-    }
-
     /* braucht das um leere objekte zu erzeugen
-    wenn ein definierter KOnstruktor vorhanden
-    um dann zu befüllen */
+        wenn ein definierter KOnstruktor vorhanden
+        um dann zu befüllen */
     public Song() {
     }
 
@@ -65,7 +37,14 @@ public class Song {
     }
 
     public Song(String title, String artist, String label, Integer released) {
+        this.title = title;
+        this.artist = artist;
+        this.label = label;
+        this.released = released;
     }
+
+
+
 
     public Integer getId() {
         return id;
@@ -103,6 +82,11 @@ public class Song {
         this.released = released;
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    //////////     my builder    ////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * Creates builder to build {@link Song}.
      * @return created builder
@@ -110,6 +94,15 @@ public class Song {
     public static Builder builder() {
         return new Builder();
     }
+
+    private Song(Builder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.artist = builder.artist;
+        this.label = builder.label;
+        this.released = Integer.valueOf(builder.released);
+    }
+
 
     /**
      * Builder to build {@link Song}.
@@ -153,5 +146,16 @@ public class Song {
         public Song build() {
             return new Song(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", label='" + label + '\'' +
+                ", released='" + released + '\'' +
+                '}';
     }
 }
