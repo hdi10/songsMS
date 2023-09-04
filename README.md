@@ -9,6 +9,10 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
 * API-Gateway PORT:8080
 
 ![Service Diagramm](workOnDrawings/ServiceDiagramm.png)
+Service Diagramm
+
+![ER Modell](workOnDrawings/ER-Modell-SongsMS-DB.png)
+
 
 # Gliederung
 
