@@ -36,5 +36,5 @@ public class UserController {
     public ResponseEntity<Object> loginUser(@RequestBody User user) {
         return authService.loginUser(user);
     }
-    
+
 }
