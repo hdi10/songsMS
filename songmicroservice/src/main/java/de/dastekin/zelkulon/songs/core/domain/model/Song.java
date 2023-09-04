@@ -10,7 +10,6 @@ import lombok.Data;
 /**
  * Model class for Song
  */
-@Data
 @Builder
 @Entity
 @Table(name = "Song")  //table vielleicht doch einfach nur Song nennen
@@ -41,7 +40,7 @@ public class Song {
         um dann zu befüllen */
     public Song() {
     }
-/*
+
     public Song(Integer id, String title, String artist, String label, Integer released) {
         this.id = id;
         this.title = title;
@@ -93,7 +92,7 @@ public class Song {
         this.released = released;
     }
 
-
+/*
     //////////////////////////////////////////////////////////////////////////////////////
     //////////     my builder    ////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +141,7 @@ public class Song {
         this.label = builder.label;
         this.released = builder.released;
     }
-
+*/
 
     @Override
     public String toString() {
@@ -153,5 +152,5 @@ public class Song {
                 ", label='" + label + '\'' +
                 ", released='" + released + '\'' +
                 '}';
-    }*/
+    }
 }

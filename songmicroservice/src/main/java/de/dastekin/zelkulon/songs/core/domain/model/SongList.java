@@ -3,13 +3,16 @@
  */
 
 package de.dastekin.zelkulon.songs.core.domain.model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+/**
+ * Model class for SongList
+ */
 @Entity
 @Table(name = "SongLists")
 public class SongList {
@@ -37,7 +40,7 @@ public class SongList {
     private Set<Song> songList = new HashSet<>();
 
     //TODO BoilerPlate Code Löschen --> Lombok
-    /*public SongList() {
+    public SongList() {
     }
 
     public SongList(Integer id, String ownerId, String name, Boolean isPrivate, Set<Song> songList) {
@@ -94,13 +97,13 @@ public class SongList {
     public void setSongList(Set<Song> songList) {
         this.songList = songList;
     }
-*/
+
     public void addSong(Song song) {
         this.songList.add(song);
     }
 
     //TODO BoilerPlate Code Löschen --> Lombok
-    /*@Override
+    @Override
     public String toString() {
         return "SongList{" +
                 "id=" + id +
@@ -109,5 +112,5 @@ public class SongList {
                 ", isPrivate=" + isPrivate +
                 ", songList=" + songList +
                 '}';
-    }*/
+    }
 }
