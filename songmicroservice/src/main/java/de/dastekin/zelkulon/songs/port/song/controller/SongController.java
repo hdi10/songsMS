@@ -2,9 +2,14 @@
  * Dastekin created on 21.07.2023 the SongController-Class inside the package - de.dastekin.zelkulon.songs.port.song.controller
  */
 package de.dastekin.zelkulon.songs.port.song.controller;
+
+import de.dastekin.zelkulon.songs.Authorization;
 import de.dastekin.zelkulon.songs.core.domain.model.Song;
+import de.dastekin.zelkulon.songs.core.domain.service.impl.SongService;
+import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
 import de.dastekin.zelkulon.songs.port.song.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,39 +21,112 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/songsMS/rest/songs")
 @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-public class SongController {
+public class SongController extends Authorization {
 
-    private final SongRepository songsRepository;
+    @Autowired
+    private final ISongService service;
 
     public SongController(SongRepository songsRepository) {
-        this.songsRepository = songsRepository;
+        this.service = new SongService(songsRepository);
     }
-
 
 
     /**
      * Hello Test Endpoint
+     *
      * @return "Teststring"
      */
-    @RequestMapping(value="/hello1",
-            method= RequestMethod.GET,
+    @RequestMapping(value = "/hello1",
+            method = RequestMethod.GET,
             produces = "text/plain;charset=UTF-8")
     @ResponseBody
     String sayHelloToUser() {
         return "Teststring";
     }
 
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      GET Methods Start////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * CREATE -> POST 1 Song
-     * @param song -  Song to Post
-     * @return - when Successful STATUS 201 and URI
-     *           else 400 or 404
-     */
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.GET,
+            produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Object> getSongById(
+            @RequestHeader(value = "Authorization") String authHeader,
+            @PathVariable(value = "id") Long id) {
+        try {
+            authUser(authHeader);
+            return service.getSongById(id);
+        } catch (Exception e) {
+            e.getCause();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+    }
+
+    //TODO STAtus
+    @RequestMapping(method = RequestMethod.GET,
+            produces = "application/json;charset=UTF-8")
+    public ResponseEntity<List<Song>> getAllSongs(
+            @RequestHeader(value = "Authorization") String authHeader) {
+        try {
+            authUser(authHeader);
+            return service.getAllSongs();
+        } catch (Exception e) {
+            e.getCause();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+    }
+
+    // TODO: 21.07.2023  GETALL Status übermnehemn!
+    /*@RequestMapping(value = "/all",
+            method = RequestMethod.GET,
+            produces = "application/json;charset=UTF-8"
+    )
+    @ResponseBody
+    ResponseEntity<List<Song>> getAllSongs() {
+        //////if (userController.authenticateUser())-------> TODO: hier weiter mit authenticate Business logic
+        try {
+            List<Song> songs = songsRepository.getAllSongs();
+            if (songs.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(songs, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
+    ////////////////////////////////////////////////////////////////////////////
+    //////////      GET Methods END ////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      POST Methods Start  /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    @RequestMapping(method = RequestMethod.POST,
+            consumes = "application/json",
+            produces = "application/json")
+    public ResponseEntity<Object>
+    addSong(
+            @RequestHeader("Authorization") String authToken, @RequestBody Song songToAdd) {
+        try {
+            authUser(authToken);
+            return service.postSong(songToAdd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+   /*
     // @PostMapping(value = "")
     @PostMapping("")
     @ResponseBody
-    ResponseEntity<?> postSong(@RequestBody Song song){
+    ResponseEntity<?> postSong(@RequestBody Song song) {
         //TODO: authenticate hier rein
         //TODO: STATUS
         Song tmpSong = songsRepository.save(song);
@@ -57,38 +135,41 @@ public class SongController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
     }
 
+*/
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      POST Methods END    /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * READ - GET 1 Song By ID
-     * @param id - ID of Song
-     * @return - when Successful STATUS 200 and URI
-     *           else 400 or 404
-     */
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    Song getSongById(@PathVariable(value = "id") Long id){
-        //TODO: authenticate hier rein
-        //TODO: STATUS
-        Song song = songsRepository.selectSongById(id);
-        if (song == null) {
-            throw new ResourceNotFoundException("Note", "id", id);
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      PUT Methods Start  /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.PUT,
+            consumes = "application/json",
+            produces = "application/json")
+    public ResponseEntity<Object>
+    updateSong(
+            @RequestHeader("Authorization") String authToken,
+            @PathVariable(value = "id") Long id,
+            @RequestBody Song songToPut) {
+        try {
+            authUser(authToken);
+            return service.updateSong(id, songToPut);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        return song;
     }
 
+/*
 
-    /**
-     * UPDATE 1 By ID -> PUT 1 as JSON
-     * @param id - ID of Song
-     * @param songForUpdate - Song to Put
-     * @return - when succesful Status 204
-     *           else 400 or 404
-     */
-    @PutMapping(value="/{id}")
+    /*
+
+    @PutMapping(value = "/{id}")
     @ResponseBody
     ResponseEntity<?> updateSong(@PathVariable(value = "id") Long id,
-                                 @RequestBody Song songForUpdate){
+                                 @RequestBody Song songForUpdate) {
         //TODO: authenticate hier rein
         //TODO: STATUS
         //todo nur erfolgreicH?
@@ -97,45 +178,52 @@ public class SongController {
         return ResponseEntity.noContent().build();
 
     }
+*/
 
-    /**
-     * UPDATE 1 By ID
-     * @param id - ID of Song
-     * @return - when succesful Status 204
-     *           else 400 or 404
-     */
-    @DeleteMapping(value="/{id}")
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      PUT Methods END  /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      DELETE Methods Start  /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+
+
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteSong(
+            @RequestHeader("Authorization") String authToken,
+            @PathVariable(value = "id") Long id) {
+        try {
+            authUser(authToken);
+            return service.deleteSong(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+/*
+
+    @DeleteMapping(value = "/{id}")
     @ResponseBody
-    ResponseEntity<?> deleteSong(@PathVariable(value = "id") Long id){
-        if (songsRepository.existsById(id)){
+    ResponseEntity<?> deleteSong(@PathVariable(value = "id") Long id) {
+        if (songsRepository.existsById(id)) {
             songsRepository.deleteById(id);
             return ResponseEntity.status(204).build();
-        }else {
+        } else {
             return ResponseEntity.status(400).build();
         }
     }
 
+*/
 
-    /**
-     * READ -> GET ALL
-     * @return - when Successful STATUS 200 and URI
-     *           else 400 or 404
-     */
-    @RequestMapping(value="/all",
-            method= RequestMethod.GET,
-            produces = "application/json;charset=UTF-8"
-    )
-    @ResponseBody
-    ResponseEntity<List<Song>> getAllSongs(){
-        //////if (userController.authenticateUser())-------> TODO: hier weiter mit authenticate Business logic
-        try {
-            List<Song> songs =  songsRepository.getAllSongs();
-            if (songs.isEmpty()){
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(songs, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////      DELETE Methods END  /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
 }
