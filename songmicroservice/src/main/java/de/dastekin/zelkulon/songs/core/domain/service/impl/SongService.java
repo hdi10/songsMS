@@ -3,5 +3,11 @@
  */
 package de.dastekin.zelkulon.songs.core.domain.service.impl;
 
-public class SongService {
+import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
+
+public class SongService implements ISongService {
+    @Override
+    public Boolean authenticateUser() {
+        return null;
+    }
 }

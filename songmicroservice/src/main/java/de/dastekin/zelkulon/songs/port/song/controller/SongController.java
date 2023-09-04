@@ -5,9 +5,6 @@ package de.dastekin.zelkulon.songs.port.song.controller;
 import de.dastekin.zelkulon.songs.core.domain.model.Song;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
 import de.dastekin.zelkulon.songs.port.song.exception.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,6 @@ import java.util.List;
 @RequestMapping(value = "/songsMS/rest/songs")
 @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
 public class SongController {
-
 
     private final SongRepository songsRepository;
 
