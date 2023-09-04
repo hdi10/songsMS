@@ -14,18 +14,17 @@ Service Diagramm
 ![ER Modell](workOnDrawings/ER-Modell-SongsMS-DB.png)
 ER Modell
 
-Schema der SongsMS Datenbank
-
-
+##Schema der SongsMS Datenbank
+###Entitäten und Attribute
 *Song*: {[**SongId:integer**, Title:string, Artist:string, Label:string, Released:integer]}
 
-*SongList*: {[**SongListId:integer**, OwnerId:string, Name:string, IsPrivate]}
+*SongLists*: {[**SongListsId:integer**, OwnerId:string, Name:string, IsPrivate]}
 
 *User*: {[**UserId:string**, Password:string, FirstName:string, LastName:string, Token:string]}
+### Relationen
+*contains*: {[**SongListId:integer, SongId:integer**]}
 
-*enthält*: {[**SongListId:integer, SongId:integer**]}
-
-*hat*: {[**UserId:string, SongListId:integer**]}
+*has*: {[**UserId:string, SongListId:integer**]}
 
 # Gliederung
 
