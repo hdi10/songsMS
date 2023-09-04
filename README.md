@@ -7,8 +7,11 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
     3. /textanalyser PORT:9020
 * Discovery/Registry Service -> Eureka PORT:8090
 * API-Gateway PORT:8080
-    
+
+![Service Diagramm](workOnDrawings/ServiceDiagramm.png)
+
 # Gliederung
+
 
 ## Service Discover/Registry Client and Server Registry
 
