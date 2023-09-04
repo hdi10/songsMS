@@ -4,7 +4,8 @@
 package de.dastekin.zelkulon.auth.core.domain.model;
 import jakarta.persistence.*;
 
-import java.util.Set;
+
+
 /*
 CREATE TABLE IF NOT EXISTS 'usertable' (
     userid VARCHAR ( 20 ) PRIMARY KEY,
@@ -18,21 +19,25 @@ CREATE TABLE IF NOT EXISTS 'usertable' (
  */
 
 // TODO: In diese Klasse den Builder aus oldSpringMVC einbauen
-
+// TODO lombok um Boilerplate zu vermeiden
 @Entity
-@Table(name = "usertable")
+@Table(name = "Users")
 public class User {
 
     @Id
-    @Column(name="user_id")
+    @Column(name="UserId")
     private String userId;
 
+    @Column(name="Password")
     private String password;
 
+    @Column(name="FirstName")
     private String firstName;
 
+    @Column(name="LastName")
     private String lastName;
 
+    @Column(name="Token")
     private String token;
 
 /*
@@ -40,6 +45,7 @@ public class User {
     Set<SongList> songLists;
 */
 
+    //TODO BoilerPlate Code Löschen --> Lombok
     public User() {
     }
 
