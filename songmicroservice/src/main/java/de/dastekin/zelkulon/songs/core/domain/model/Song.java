@@ -4,30 +4,44 @@
 package de.dastekin.zelkulon.songs.core.domain.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * Model class for Song
  */
+@Data
+@Builder
 @Entity
-@Table(name = "songs")  //table vielleicht doch einfach nur Song nennen
+@Table(name = "Song")  //table vielleicht doch einfach nur Song nennen
 public class Song {
 
     @Id // kennzeichnet das Identitätsattribut entspricht dem PK (primary key)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // bedeutet, dass der PK automatisch durch die DB vergeben wird
     @Column(name = "SongId")
-    private Integer id = null;
-    private String title = null;
-    private String artist = null;
-    private String label = null;
-    private Integer released = null;
+    private Integer id;
+
+    @Column(name="Title")
+    private String title;
+
+    @Column(name="Artist")
+    private String artist;
+
+    @Column(name="Label")
+    private String label;
+
+    @Column(name="Released")
+    private Integer released;
+
+
+    //TODO BoilerPlate Code Löschen --> Lombok
 
     /* braucht das um leere objekte zu erzeugen
         wenn ein definierter KOnstruktor vorhanden
         um dann zu befüllen */
     public Song() {
     }
-
-
+/*
     public Song(Integer id, String title, String artist, String label, Integer released) {
         this.id = id;
         this.title = title;
@@ -42,9 +56,6 @@ public class Song {
         this.label = label;
         this.released = released;
     }
-
-
-
 
     public Integer getId() {
         return id;
@@ -87,45 +98,21 @@ public class Song {
     //////////     my builder    ////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * Creates builder to build {@link Song}.
-     * @return created builder
-     */
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    private Song(Builder builder) {
-        this.id = builder.id;
-        this.title = builder.title;
-        this.artist = builder.artist;
-        this.label = builder.label;
-        this.released = Integer.valueOf(builder.released);
-    }
-
-
-    /**
-     * Builder to build {@link Song}.
-     */
     public static final class Builder {
-        private int id;
+        private Integer id;
         private String title;
         private String artist;
         private String label;
-        private String released;
+        private Integer released;
 
-        private Builder() {
-        }
-
-        public Builder withId(int id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public Builder withUserId(String title) {
+        public Builder withTitle(String title) {
             this.title = title;
             return this;
-
         }
 
         public Builder withArtist(String artist) {
@@ -138,7 +125,7 @@ public class Song {
             return this;
         }
 
-        public Builder withReleased(String released) {
+        public Builder withReleased(Integer released) {
             this.released = released;
             return this;
         }
@@ -147,6 +134,15 @@ public class Song {
             return new Song(this);
         }
     }
+
+    private Song(Builder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.artist = builder.artist;
+        this.label = builder.label;
+        this.released = builder.released;
+    }
+
 
     @Override
     public String toString() {
@@ -157,5 +153,5 @@ public class Song {
                 ", label='" + label + '\'' +
                 ", released='" + released + '\'' +
                 '}';
-    }
+    }*/
 }

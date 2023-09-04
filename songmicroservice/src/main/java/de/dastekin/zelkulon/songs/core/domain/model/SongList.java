@@ -3,32 +3,41 @@
  */
 
 package de.dastekin.zelkulon.songs.core.domain.model;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
-@Table(name = "song_list")
+@Table(name = "SongLists")
 public class SongList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "song_list_id")      //TODO hier überlegen ob nicht in der table sogar id reicht
+    @Column(name = "SongListsId")      //TODO hier überlegen ob nicht in der table sogar id reicht
     private Integer id;
+
+    @Column(name="OwnerId")
     private String ownerId;
+
+    @Column(name="Name")
     private String name;
+
+    @Column(name="IsPrivate")
     private Boolean isPrivate;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER) //TODO vielleicht den fetch type ändern auf lazy um die performance zu verbessern
     @JoinTable(
-            name = "song_list_song",
-            joinColumns = {@JoinColumn(name = "song_list_id" , referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "song_id", referencedColumnName = "id")})
-    @OrderBy(value = "id")
-    private Set<Song> songList = new HashSet();
+            name = "contains",
+            joinColumns = {@JoinColumn(name = "SongListsId" , referencedColumnName = "SongListsId")},
+            inverseJoinColumns = {@JoinColumn(name = "SongId", referencedColumnName = "SongId")})
+    //TODO hier orderby?
+    //@OrderBy(value = "id")
+    private Set<Song> songList = new HashSet<>();
 
-    public SongList() {
+    //TODO BoilerPlate Code Löschen --> Lombok
+    /*public SongList() {
     }
 
     public SongList(Integer id, String ownerId, String name, Boolean isPrivate, Set<Song> songList) {
@@ -85,12 +94,13 @@ public class SongList {
     public void setSongList(Set<Song> songList) {
         this.songList = songList;
     }
-
+*/
     public void addSong(Song song) {
         this.songList.add(song);
     }
 
-    @Override
+    //TODO BoilerPlate Code Löschen --> Lombok
+    /*@Override
     public String toString() {
         return "SongList{" +
                 "id=" + id +
@@ -99,5 +109,5 @@ public class SongList {
                 ", isPrivate=" + isPrivate +
                 ", songList=" + songList +
                 '}';
-    }
+    }*/
 }
