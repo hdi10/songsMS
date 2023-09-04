@@ -16,12 +16,16 @@ ER Modell
 
 Schema der SongsMS Datenbank
 
-Song: {[SongId:integer, Title:string, Artist:string, Label:string, Released:integer]}
-SongList: {[SongListId:integer, OwnerId:string, Name:string, IsPrivate]}
-User: {[UserId:string, Password:string, FirstName:string, LastName:string, Token:string]}
 
-enthält: {[SongListId:integer, SongId:integer]}
-hat: {[UserId:string, SongListId:integer]}
+*Song*: {[**SongId:integer**, Title:string, Artist:string, Label:string, Released:integer]}
+
+*SongList*: {[**SongListId:integer**, OwnerId:string, Name:string, IsPrivate]}
+
+*User*: {[**UserId:string**, Password:string, FirstName:string, LastName:string, Token:string]}
+
+*enthält*: {[**SongListId:integer, SongId:integer**]}
+
+*hat*: {[**UserId:string, SongListId:integer**]}
 
 # Gliederung
 
