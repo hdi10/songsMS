@@ -14,7 +14,7 @@ public class Song {
 
     @Id // kennzeichnet das Identitätsattribut entspricht dem PK (primary key)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // bedeutet, dass der PK automatisch durch die DB vergeben wird
-    @Column(name = "id")
+    @Column(name = "SongId")
     private Integer id = null;
     private String title = null;
     private String artist = null;
