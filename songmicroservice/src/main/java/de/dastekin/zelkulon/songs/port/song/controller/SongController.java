@@ -20,9 +20,12 @@ public class SongController extends Authorization {
 
     @Autowired
     private final ISongService service;
+    private final SongRepository songRepository;
 
-    public SongController(SongRepository songsRepository) {
+    public SongController(SongRepository songsRepository,
+                          SongRepository songRepository) {
         this.service = new SongService(songsRepository);
+        this.songRepository = songRepository;
     }
 
 
@@ -37,7 +40,11 @@ public class SongController extends Authorization {
     @ResponseBody
     String sayHelloToUser(@RequestHeader(value = "Authorization") String authHeader) {
         try {
-            authUser(authHeader);
+
+            //authUser(authHeader);
+
+
+
             return "Teststring";
         }catch (Exception e){
             e.printStackTrace();

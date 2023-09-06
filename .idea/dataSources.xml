@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="d769pkv3opjrh5@ec2-54-73-22-169.eu-west-1.compute.amazonaws.com" uuid="bfd6f1e5-1e9f-4b65-8999-58a0a88ef8dd">
+    <data-source source="LOCAL" name="songs &amp; songLists" uuid="bfd6f1e5-1e9f-4b65-8999-58a0a88ef8dd">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d769pkv3opjrh5</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="authmicroservice/Hibernate" uuid="a8683aea-36b2-45a2-b8ce-82ec9b0fd300">
+    <data-source source="LOCAL" name="auth" uuid="85b12721-b502-4c5f-8921-aca63ed42aa5">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://    ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d2jl3uvsrl3sv</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-34-242-120-113.eu-west-1.compute.amazonaws.com:5432/d2itmm6kqv44dr</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

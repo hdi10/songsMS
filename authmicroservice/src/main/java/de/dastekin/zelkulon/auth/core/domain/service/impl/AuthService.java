@@ -52,7 +52,10 @@ public class AuthService implements IAuthService {
             HttpHeaders authHeader = new HttpHeaders();
             authHeader.add("Authorization", token);
             logger.info("im nächsten schritt speicher nutzer " + user.getUserId() + " mit dem token " + token);
+
+            user.setToken(token);
             userRepository.save(user);
+
 
             logger.info("Nutzer Speicher Schritt getriggert " + userRepository.save(user).toString());
 

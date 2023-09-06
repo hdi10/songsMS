@@ -21,18 +21,20 @@ public class AuthMicroserviceMainApplication {
 		SpringApplication.run(AuthMicroserviceMainApplication.class, args);
 	}
 
-}
 
-@RestController
-class ServiceInstanceRestController {
+	@RestController
+	class ServiceInstanceRestController {
 
-	@Autowired(required = false) //TODO: remove this
-	private DiscoveryClient discoveryClient;
+		@Autowired(required = false) //TODO: remove this
+		private DiscoveryClient discoveryClient;
 
-	@RequestMapping("/service-instances/{applicationName}")
-	public List<ServiceInstance> serviceInstancesByApplicationName(
-			@PathVariable String applicationName) {
-		return this.discoveryClient.getInstances(applicationName);
+		@RequestMapping("/service-instances/{applicationName}")
+		public List<ServiceInstance> serviceInstancesByApplicationName(
+				@PathVariable String applicationName) {
+			return this.discoveryClient.getInstances(applicationName);
+		}
+
 	}
-
 }
+
+

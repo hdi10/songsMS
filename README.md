@@ -8,6 +8,8 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
 * Discovery/Registry Service -> Eureka PORT:8090
 * API-Gateway PORT:8080
 
+Diagramme mit mac programm?????
+
 ![Service Diagramm](workOnDrawings/ServiceDiagramm.png)
 Service Diagramm
 

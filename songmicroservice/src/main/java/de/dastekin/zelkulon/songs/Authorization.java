@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Diese abstrakte Klasse dient als Basisklasse für verschiedene
@@ -22,25 +23,16 @@ public abstract class Authorization {
 
     Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
 
-    @Autowired
-    RestTemplate restTemplate;
+    private WebClient webClient = WebClient.create();
 
-    /**
-     * Autorisiert einen Benutzer durch den Aufruf einer externen Authentifizierungs-API.
-     *
-     * @param authToken Das Authentifizierungstoken für den Benutzer.
-     * @return Eine Zeichenfolge, die das Ergebnis der Autorisierung darstellt.
-     */
-    public String authUser(String authToken) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", authToken);
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        String url = "http://localhost:9010/songMS/rest/auth";
-        log.info("Sende Request an folgende URL: " + url);
-
-        return restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class).getBody();
+    public boolean authUser(String token) {
+        Boolean isValid = webClient.post()
+                .uri("http://auth-service/validateToken")
+                .bodyValue(token)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+        return isValid != null && isValid;
     }
 
 
