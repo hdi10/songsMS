@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SongsZelkulon.iml" filepath="$PROJECT_DIR$/.idea/SongsZelkulon.iml" />
       <module fileurl="file://$PROJECT_DIR$/apigateway/apigateway.iml" filepath="$PROJECT_DIR$/apigateway/apigateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/authmicroservice/authmicroservice.iml" filepath="$PROJECT_DIR$/authmicroservice/authmicroservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/serviceregistry/serviceregistry.iml" filepath="$PROJECT_DIR$/serviceregistry/serviceregistry.iml" />

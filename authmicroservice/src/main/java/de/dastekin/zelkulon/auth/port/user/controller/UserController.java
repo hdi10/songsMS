@@ -29,6 +29,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Object> checkUser(@RequestHeader("Authorization") String authToken) {
+        logger.info("Auth Token empfangen " + authToken);
+        logger.debug("EndPunkt URL : /songsMS/rest/auth");
         return authService.checkUser(authToken);
     }
 

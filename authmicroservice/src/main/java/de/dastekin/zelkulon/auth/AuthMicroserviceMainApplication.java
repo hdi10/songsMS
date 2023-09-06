@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class AuthMicroserviceMainApplication {
 
 	public static void main(String[] args) {

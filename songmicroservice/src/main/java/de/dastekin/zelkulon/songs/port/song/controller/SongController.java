@@ -8,19 +8,14 @@ import de.dastekin.zelkulon.songs.core.domain.model.Song;
 import de.dastekin.zelkulon.songs.core.domain.service.impl.SongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
-import de.dastekin.zelkulon.songs.port.song.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/songsMS/rest/songs")
-@ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
 public class SongController extends Authorization {
 
     @Autowired
@@ -40,8 +35,14 @@ public class SongController extends Authorization {
             method = RequestMethod.GET,
             produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    String sayHelloToUser() {
-        return "Teststring";
+    String sayHelloToUser(@RequestHeader(value = "Authorization") String authHeader) {
+        try {
+            authUser(authHeader);
+            return "Teststring";
+        }catch (Exception e){
+            e.printStackTrace();
+            return String.valueOf(new ResponseEntity<>(HttpStatus.UNAUTHORIZED));
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -58,7 +59,7 @@ public class SongController extends Authorization {
             authUser(authHeader);
             return service.getSongById(id);
         } catch (Exception e) {
-            e.getCause();
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
@@ -67,13 +68,13 @@ public class SongController extends Authorization {
     //TODO STAtus
     @RequestMapping(method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    public ResponseEntity<List<Song>> getAllSongs(
+    public ResponseEntity<Object> getAllSongs(
             @RequestHeader(value = "Authorization") String authHeader) {
         try {
             authUser(authHeader);
             return service.getAllSongs();
         } catch (Exception e) {
-            e.getCause();
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 

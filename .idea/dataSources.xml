@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="songmicroservice/Hibernate" uuid="7f3ce3e0-b3ee-4dc4-8af8-43db9413c28e">
-      <driver-ref>hsqldb.local</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
-      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
-      <jdbc-url>jdbc:hsqldb:mem:PUBLIC</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="dcb6ac17fr9d8l@ec2-18-202-145-226.eu-west-1.compute.amazonaws.com" uuid="bfd6f1e5-1e9f-4b65-8999-58a0a88ef8dd">
+    <data-source source="LOCAL" name="d769pkv3opjrh5@ec2-54-73-22-169.eu-west-1.compute.amazonaws.com" uuid="bfd6f1e5-1e9f-4b65-8999-58a0a88ef8dd">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-18-202-145-226.eu-west-1.compute.amazonaws.com:5432/dcb6ac17fr9d8l</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d769pkv3opjrh5</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="authmicroservice/Hibernate" uuid="a8683aea-36b2-45a2-b8ce-82ec9b0fd300">

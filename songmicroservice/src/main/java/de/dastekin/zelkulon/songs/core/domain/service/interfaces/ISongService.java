@@ -27,7 +27,7 @@ public interface ISongService {
      * 500 - Internal Server Error if an error occurs
      * 200 - OK if everything is successful
      */
-    public ResponseEntity<List<Song>> getAllSongs();
+    public ResponseEntity<Object> getAllSongs();
 
     /**
      * Adds a song.

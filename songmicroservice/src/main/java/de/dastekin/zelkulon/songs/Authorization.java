@@ -36,14 +36,11 @@ public abstract class Authorization {
         headers.set("Authorization", authToken);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(
-                "http://authService/songsMS/rest/auth", HttpMethod.GET, entity, String.class);
-        log.info("Status Code: " + response.getStatusCode());
-        log.info("Response Body: " + response.getBody());
-        return response.getBody();
+        String url = "http://localhost:9010/songMS/rest/auth";
+        log.info("Sende Request an folgende URL: " + url);
 
-        //return restTemplate.exchange(   // TODO prüfen ob endpoint richtig ist
-         //       "http://authService/auth", HttpMethod.GET, entity, String.class).getBody();
+        return restTemplate.exchange(
+                url, HttpMethod.GET, entity, String.class).getBody();
     }
 
 

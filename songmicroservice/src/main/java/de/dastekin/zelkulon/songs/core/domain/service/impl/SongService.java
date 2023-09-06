@@ -36,16 +36,8 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public ResponseEntity<List<Song>> getAllSongs(){
-        try {
-            List<Song> songs =  songRepository.getAllSongs();
-            if (songs.isEmpty()){
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(songs, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Object> getAllSongs(){
+        return new ResponseEntity<>(songRepository.findAll(), HttpStatus.OK);
     }
 
     @Override
