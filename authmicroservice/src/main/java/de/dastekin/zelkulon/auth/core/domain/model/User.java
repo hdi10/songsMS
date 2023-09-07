@@ -8,38 +8,30 @@ import java.security.SecureRandom;
 
 
 
-/*
-CREATE TABLE IF NOT EXISTS 'usertable' (
-    userid VARCHAR ( 20 ) PRIMARY KEY,
-    password VARCHAR ( 20 ) NOT NULL,
-    firstName VARCHAR ( 50 ) NOT NULL,
-    lastName VARCHAR ( 50 ) NOT NULL,
-    token TEXT NOT NULL
-);
-
-
+/**
+ * Model class for User
  */
 
 // TODO: In diese Klasse den Builder aus oldSpringMVC einbauen
 // TODO lombok um Boilerplate zu vermeiden
 @Entity
-@Table(name = "Users")
+@Table(name = "user_account")
 public class User {
 
     @Id
-    @Column(name="UserId")
+    @Column(name="user_id")
     private String userId;
 
-    @Column(name="Password")
+    @Column(name="password")
     private String password;
 
-    @Column(name="FirstName")
+    @Column(name="first_name")
     private String firstName;
 
-    @Column(name="LastName")
+    @Column(name="last_name")
     private String lastName;
 
-    @Column(name="Token")
+    @Column(name="token")
     private String token;
 
 /*

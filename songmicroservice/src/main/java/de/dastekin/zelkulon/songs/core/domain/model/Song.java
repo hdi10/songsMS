@@ -12,24 +12,24 @@ import lombok.Data;
  */
 @Builder
 @Entity
-@Table(name = "Song")  //table vielleicht doch einfach nur Song nennen
+@Table(name = "song")  //table vielleicht doch einfach nur Song nennen
 public class Song {
 
     @Id // kennzeichnet das Identitätsattribut entspricht dem PK (primary key)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // bedeutet, dass der PK automatisch durch die DB vergeben wird
-    @Column(name = "SongId")
+    @Column(name = "song_id")
     private Integer id;
 
-    @Column(name="Title")
+    @Column(name="title")
     private String title;
 
-    @Column(name="Artist")
+    @Column(name="artist")
     private String artist;
 
-    @Column(name="Label")
+    @Column(name="label")
     private String label;
 
-    @Column(name="Released")
+    @Column(name="released_year")
     private Integer released;
 
 

@@ -14,27 +14,27 @@ import java.util.Set;
  * Model class for SongList
  */
 @Entity
-@Table(name = "SongLists")
+@Table(name = "song_list")
 public class SongList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SongListsId")      //TODO hier überlegen ob nicht in der table sogar id reicht
+    @Column(name = "song_list_id")      //TODO hier überlegen ob nicht in der table sogar id reicht
     private Integer id;
 
-    @Column(name="OwnerId")
+    @Column(name="owner_id")
     private String ownerId;
 
-    @Column(name="Name")
+    @Column(name="name")
     private String name;
 
-    @Column(name="IsPrivate")
+    @Column(name="is_private")
     private Boolean isPrivate;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER) //TODO vielleicht den fetch type ändern auf lazy um die performance zu verbessern
     @JoinTable(
-            name = "contains",
-            joinColumns = {@JoinColumn(name = "SongListsId" , referencedColumnName = "SongListsId")},
-            inverseJoinColumns = {@JoinColumn(name = "SongId", referencedColumnName = "SongId")})
+            name = "contains_song",
+            joinColumns = {@JoinColumn(name = "song_list_id" , referencedColumnName = "song_list_id")},
+            inverseJoinColumns = {@JoinColumn(name = "song_id", referencedColumnName = "song_id")})
     //TODO hier orderby?
     //@OrderBy(value = "id")
     private Set<Song> songList = new HashSet<>();

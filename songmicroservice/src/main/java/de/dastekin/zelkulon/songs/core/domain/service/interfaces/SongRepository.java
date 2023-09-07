@@ -13,10 +13,10 @@ import java.util.List;
 
 @Repository
 public interface SongRepository extends CrudRepository<Song, Long> {
-    @Query(value = "SELECT * FROM Song WHERE SongId = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM song WHERE song_id = ?1", nativeQuery = true)
     Song selectSongById(Long id);
 
-    @Query(value = "SELECT * FROM Song", nativeQuery = true)
+    @Query(value = "SELECT * FROM song", nativeQuery = true)
     List<Song> getAllSongs();
 
     /*@Query(value = "SELECT * FROM songs ", nativeQuery = true)

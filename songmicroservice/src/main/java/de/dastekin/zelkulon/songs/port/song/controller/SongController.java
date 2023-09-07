@@ -41,7 +41,7 @@ public class SongController extends Authorization {
     String sayHelloToUser(@RequestHeader(value = "Authorization") String authHeader) {
         try {
 
-            //authUser(authHeader);
+            authUser(authHeader);
 
 
 

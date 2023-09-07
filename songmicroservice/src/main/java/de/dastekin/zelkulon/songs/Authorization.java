@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.io.Serial;
+
 
 /**
  * Diese abstrakte Klasse dient als Basisklasse für verschiedene
@@ -19,20 +23,25 @@ import org.springframework.web.reactive.function.client.WebClient;
  * Sie verwendet RestTemplate, um eine externe Authentifizierungs-API
  * für die Benutzerautorisierung anzusprechen.
  */
-public abstract class Authorization {
+@Service
+public class Authorization {
 
     Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
 
-    private WebClient webClient = WebClient.create();
+    @Autowired
+    private WebClient.Builder webClientBuilder;
 
-    public boolean authUser(String token) {
-        Boolean isValid = webClient.post()
-                .uri("http://auth-service/validateToken")
-                .bodyValue(token)
+    public Mono<String> authUser(String authToken) {
+        WebClient webClient = webClientBuilder.build();
+
+        return webClient.get()
+                .uri("http://localhost:8080/auth")
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .retrieve()
-                .bodyToMono(Boolean.class)
-                .block();
-        return isValid != null && isValid;
+                .bodyToMono(String.class)
+                .doOnNext(authResponse -> {
+                    System.out.println("Received auth response: " + authResponse);
+                });
     }
 
 

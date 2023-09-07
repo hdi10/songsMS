@@ -37,7 +37,7 @@ public class SongMicroserviceMainApplication {
      * @return eine neue  RestTemplate Instanz mit Load-Balancing-Fähigkeiten
      */
     @Bean
-    @LoadBalanced
+    //@LoadBalanced //TODO Loadbalancer rein reaus?
     public RestTemplate loadBalancedRestTemplate() {
         return new RestTemplate();
     }
