@@ -32,8 +32,6 @@ public class UserController {
         logger.info("Auth Token empfangen " + authToken);
         logger.debug("EndPunkt URL : /auth");
         return authService.checkUser(authToken);
-
-
     }
 
     @PostMapping

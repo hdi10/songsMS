@@ -24,7 +24,7 @@ import java.io.Serial;
  * für die Benutzerautorisierung anzusprechen.
  */
 @Service
-public class Authorization {
+public abstract class Authorization {
 
     Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
 
@@ -35,7 +35,7 @@ public class Authorization {
         WebClient webClient = webClientBuilder.build();
 
         return webClient.get()
-                .uri("http://localhost:8080/auth")
+                .uri("http://auth-service/auth")
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .retrieve()
                 .bodyToMono(String.class)

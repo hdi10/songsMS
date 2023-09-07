@@ -8,6 +8,7 @@ import de.dastekin.zelkulon.songs.core.domain.model.Song;
 import de.dastekin.zelkulon.songs.core.domain.service.impl.SongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/songs")
 public class SongController extends Authorization {
+    Logger logger = org.slf4j.LoggerFactory.getLogger(SongController.class);
 
     @Autowired
     private final ISongService service;
@@ -41,9 +43,10 @@ public class SongController extends Authorization {
     String sayHelloToUser(@RequestHeader(value = "Authorization") String authHeader) {
         try {
 
+
+            logger.info("Er versucht sich einzuloggen mit AuthHeader(TOKEN): " + authHeader);
+
             authUser(authHeader);
-
-
 
             return "Teststring";
         }catch (Exception e){
