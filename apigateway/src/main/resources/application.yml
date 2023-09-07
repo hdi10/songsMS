@@ -8,14 +8,14 @@ spring:
     gateway:
       routes:
         ## songs-service ----> http://localhost:8080/songs/ port forwarding auf http://localhost:9010/songs/
-        - id: songmicroservice
-          uri: lb://songmicroservice
+        - id: songs-service
+          uri: lb://songs-service
           predicates:
             - Path=/songs/**
 
         ## songLists-service ----> http://localhost:8080/songLists/ port forwarding auf http://localhost:9010/songLists/
-        - id: songLists
-          uri: lb://songLists
+        - id: songs-service
+          uri: lb://songs-service
           predicates:
             - Path=/songLists/**
 

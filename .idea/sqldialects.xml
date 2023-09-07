@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/authmicroservice/src/main/java/de/dastekin/zelkulon/auth/core/domain/service/interfaces/UserRepository.java" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/songmicroservice/src/main/java/de/dastekin/zelkulon/songs/core/domain/service/interfaces/SongRepository.java" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/songmicroservice/src/test/resources/archive/usersonglist.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/songmicroservice/src/test/resources/songlist.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/songmicroservice/src/test/resources/songlistsongs.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/workOnDrawings/myDatabase.sql" dialect="PostgreSQL" />
