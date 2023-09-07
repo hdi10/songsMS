@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/songsMS/rest/songLists")
+@RequestMapping(value = "/songLists")
 public class SongListController {
 
 

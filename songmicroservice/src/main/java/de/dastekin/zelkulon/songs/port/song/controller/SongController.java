@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/songsMS/rest/songs")
+@RequestMapping(value = "/songs")
 public class SongController extends Authorization {
 
     @Autowired

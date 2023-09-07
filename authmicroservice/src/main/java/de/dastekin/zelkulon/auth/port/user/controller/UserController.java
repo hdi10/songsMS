@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/songsMS/rest/auth")
+@RequestMapping(value = "/auth")
 public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 

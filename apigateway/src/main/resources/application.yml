@@ -7,31 +7,24 @@ spring:
   cloud:
     gateway:
       routes:
-        ## songs-service
+        ## songs-service ----> http://localhost:8080/songs/ port forwarding auf http://localhost:9010/songs/
         - id: songmicroservice
           uri: lb://songmicroservice
           predicates:
             - Path=/songs/**
-          filters:
-            - StripPrefix=1
 
-        ## songLists-service
+        ## songLists-service ----> http://localhost:8080/songLists/ port forwarding auf http://localhost:9010/songLists/
         - id: songLists
           uri: lb://songLists
           predicates:
             - Path=/songLists/**
-          filters:
-            - StripPrefix=1
 
-        ## auth-service ----> http://localhost:8080/auth/songsMS/rest/auth funktioniert why?
-
-        ## hier bitte stattdessen auf http://localhost:8080/songsMS/rest/auth
+        ## auth-service ----> http://localhost:8080/auth/ port forwarding auf http://localhost:9000/auth/
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
+
 
 server:
   port: 8080
