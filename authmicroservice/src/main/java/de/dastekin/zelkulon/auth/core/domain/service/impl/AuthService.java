@@ -26,7 +26,7 @@ public class AuthService implements IAuthService {
     @Override
     public ResponseEntity<Object> checkUser(String authToken) {
         User user = userRepository.getUserByToken(authToken);
-        if (user == null) {
+        if (user.getUserId() == null || !userRepository.existsByToken(authToken)) {
             logger.info("Nutzer nicht gefunden mit dem Token: " + authToken);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -57,7 +57,7 @@ public class AuthService implements IAuthService {
             userRepository.save(user);
 
 
-            logger.info("Nutzer Speicher Schritt getriggert " + userRepository.save(user).toString());
+            logger.info("Nutzer Speicher Schritt getriggert " + userRepository.save(user));
 
             return new ResponseEntity<>(token, authHeader, HttpStatus.OK);
         } else {

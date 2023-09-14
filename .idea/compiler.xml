@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="apigateway" />
         <module name="songmicroservice" />
-        <module name="zelkulonmicroservice" />
         <module name="authmicroservice" />
+        <module name="zelkulonmicroservice" />
         <module name="serviceregistry" />
       </profile>
     </annotationProcessing>
