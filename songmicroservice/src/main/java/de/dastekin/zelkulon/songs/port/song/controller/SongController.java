@@ -22,12 +22,9 @@ public class SongController extends Authorization {
 
     @Autowired
     private final ISongService service;
-    private final SongRepository songRepository;
 
-    public SongController(SongRepository songsRepository,
-                          SongRepository songRepository) {
+    public SongController(SongRepository songsRepository) {
         this.service = new SongService(songsRepository);
-        this.songRepository = songRepository;
     }
 
 

@@ -26,9 +26,9 @@ import java.io.Serial;
 @Service
 public abstract class Authorization {
 
-    Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
 
-    @Autowired
+
     private WebClient.Builder webClientBuilder;
 
     public Mono<String> authUser(String authToken) {
