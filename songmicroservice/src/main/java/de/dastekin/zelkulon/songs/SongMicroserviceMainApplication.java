@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class SongMicroserviceMainApplication {
      */
     @Bean
     @LoadBalanced //TODO Loadbalancer rein reaus?
-    public RestTemplate loadBalancedRestTemplate() {
-        return new RestTemplate();
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
     }
 
     @RestController

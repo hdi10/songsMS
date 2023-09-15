@@ -4,6 +4,7 @@
 package de.dastekin.zelkulon.songs;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,10 +27,11 @@ import java.io.Serial;
 @Service
 public abstract class Authorization {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Authorization.class);
+    private static final Logger log = LoggerFactory.getLogger(Authorization.class);
 
+    @Autowired
+    WebClient.Builder webClientBuilder;
 
-    private WebClient.Builder webClientBuilder;
 
     public Mono<String> authUser(String authToken) {
         WebClient webClient = webClientBuilder.build();

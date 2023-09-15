@@ -43,6 +43,8 @@ public class SongController extends Authorization {
 
             logger.info("Er versucht sich einzuloggen mit AuthHeader(TOKEN): " + authHeader);
 
+
+
             authUser(authHeader);
 
             return "Teststring";
