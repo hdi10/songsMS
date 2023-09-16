@@ -1,6 +1,7 @@
 package de.dastekin.zelkulon.songs.port.song.controller;
 
 import de.dastekin.zelkulon.songs.Authorization;
+import de.dastekin.zelkulon.songs.core.domain.model.SongList;
 import de.dastekin.zelkulon.songs.core.domain.service.impl.SongListService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongListService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongListRepository;
@@ -176,5 +177,17 @@ public class SongListController extends Authorization {
         myLogger.info("Die Songliste ist nicht public und der User(token) ist nicht der Owner");
     }
 
+
+    //POST
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> postSongList(
+            @RequestHeader("Authorization") String authToken,
+            @RequestBody SongList songList) {
+
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
+
+        return service.addSongList(derAuthentifizierteUser.block(), songList);
+    }
 
 }
