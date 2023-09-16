@@ -226,4 +226,19 @@ public class SongListController extends Authorization {
         }
 
     }
+
+
+    // TODO: StatusCODES Ma Bidde in den Controller und nicht in den Service! Wat willste da mit den StatusCodes?! biste bekloppt meen besta?! :))) heha so rede ich mit mir selbst
+    @PutMapping(value = "/{songListId}", consumes = "application/json")
+    public ResponseEntity<?> putSongListWithId1(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList){
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
+        return service.updateSongList1(derAuthentifizierteUser.block(), id, songList);
+    }
+
+    @PutMapping(value = "/test2/{songListId}", consumes = "application/json")
+    public ResponseEntity<?> putSongListWithId2(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList){
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
+        return service.updateSongList2(derAuthentifizierteUser.block(), id, songList);
+    }
+
 }

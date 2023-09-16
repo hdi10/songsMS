@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SongListService implements ISongListService {
@@ -112,6 +111,8 @@ public class SongListService implements ISongListService {
 
     }
 
+
+
     private boolean doesSongExistInDatabase(Song inputSong, List<Song> allSongs) {
         return allSongs.stream().anyMatch(dbSong -> dbSong.getId().equals(inputSong.getId()));
     }
@@ -119,8 +120,60 @@ public class SongListService implements ISongListService {
 
 
     @Override
-    public ResponseEntity<?> updateSongList(String userId, SongList songList2Update) {
-        return null;
+    public ResponseEntity<?> updateSongList1(String userId, Long id, SongList songList2Update) {
+
+        Iterable<SongList> songList = songListRepository.gibMirDieSongListMitDerId(id);
+
+        Long songListId = songList2Update.getId().longValue();
+
+        if (songListId.equals(id)) {
+            songList2Update.setOwnerId(userId);
+            songListRepository.save(songList2Update);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
+
+    }
+
+    @Override
+    public ResponseEntity<?> updateSongList2(String userId, Long id, SongList songList2Update) {
+
+        Iterable<SongList> songList = songListRepository.gibMirDieSongListMitDerId(id);
+
+
+        Long songListId = songList2Update.getId().longValue();
+
+        if (songListId.equals(id)) {
+            songList2Update.setOwnerId(userId);
+
+            if(songList2Update.getName() != null) {
+                songList.iterator().next().setName(songList2Update.getName());
+            }
+
+            if(songList2Update.getPrivate() != null) {
+                songList.iterator().next().setPrivate(songList2Update.getPrivate());
+            }
+
+            if (songList2Update.getSongList() != null) {
+                songList.iterator().next().setSongList(songList2Update.getSongList());
+            }
+
+            if (songList2Update.getOwnerId() != null) {
+                songList.iterator().next().setOwnerId(songList2Update.getOwnerId());
+            }
+
+
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
+
     }
 
     @Override

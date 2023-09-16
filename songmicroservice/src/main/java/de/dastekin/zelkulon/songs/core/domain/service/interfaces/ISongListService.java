@@ -35,7 +35,10 @@ public interface ISongListService {
 
     ResponseEntity<?> addSongList(String userId , SongList songList2Add);
 
-    ResponseEntity<?> updateSongList(String userId , SongList songList2Update);
+
+    ResponseEntity<?> updateSongList1(String userId, Long id, SongList songList2Update);
+
+    ResponseEntity<?> updateSongList2(String userId, Long id, SongList songList2Update);
 
     boolean deleteSongList(String userId , Long id);
 
