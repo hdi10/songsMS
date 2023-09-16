@@ -36,14 +36,16 @@ public abstract class Authorization {
     public Mono<String> authUser(String authToken) {
         WebClient webClient = webClientBuilder.build();
 
-        return webClient.get()
-                .uri("http://auth-service/auth")
-                .header(HttpHeaders.AUTHORIZATION, authToken)
+        //Bspw. Maxime
+        Mono<String> responseIsUserName = webClient.get()
+                .uri("http://auth-service:9000/auth")
+                .header("Authorization", authToken)
                 .retrieve()
-                .bodyToMono(String.class)
-                .doOnNext(authResponse -> {
-                    System.out.println("Received auth response: " + authResponse);
-                });
+                .bodyToMono(String.class);
+
+        log.info(responseIsUserName.toString());
+
+        return responseIsUserName;
     }
 
 

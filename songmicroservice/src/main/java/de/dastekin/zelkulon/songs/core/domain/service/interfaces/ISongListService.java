@@ -13,7 +13,11 @@ public interface ISongListService {
 
     ResponseEntity<?> getSongListByUserId(String userId , String userId2Search4);
 
-    ResponseEntity<?> getAllSongListsByUserId(String userId);
+
+    /*
+        * Get All SongLists aus dem service aufrufen (Eigene Postgresqql native query) ---> SongListRepository
+     */
+    ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String userId);
 
     ResponseEntity<?> addSongList(String userId , SongList songList2Add);
 

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import de.dastekin.zelkulon.songs.Authorization;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -30,24 +31,37 @@ public class SongListController extends Authorization {
     /*
      * Get All SongLists aus dem service aufrufen
      */
+//    @GetMapping(produces = "application/json")
+//    public ResponseEntity<?> getAllSongListsByUserId(
+//            @RequestHeader("Authorization") String authToken,
+//            @RequestParam(required = false, name = "userId") Optional<String> userIdSearch4) {
+//
+//        try {
+//                // TODD: HIER HARDCODED !!!!!!!!!!!!!!!!!!!
+//            //String authorizedUser = String.valueOf(authUser(authToken));
+//
+//                myLogger.info("Fetching all song lists");
+//                myLogger.info(service.getAllSongLists("maxime", 3L).toString());
+//                return service.getAllSongLists("maxime", 3L);
+//
+//
+//        } catch (Exception e) {
+//            myLogger.error("An error occurred while fetching song lists: ", e);
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//    }
+
+
     @GetMapping(produces = "application/json")
-    public ResponseEntity<?> getAllSongListsByUserId(
-            @RequestHeader("Authorization") String authToken,
-            @RequestParam(required = false, name = "userId") Optional<String> userIdSearch4) {
+    public ResponseEntity<?> getAllSongListObPrivateOderNichtVonOwner(@RequestHeader("Authorization") String authToken, @RequestParam(name = "owner_id") String ownerID) {
 
-        try {
-                // TODD: HIER HARDCODED !!!!!!!!!!!!!!!!!!!
-            //String authorizedUser = String.valueOf(authUser(authToken));
-
-                myLogger.info("Fetching all song lists");
-                myLogger.info(service.getAllSongLists("maxime", 3L).toString());
-                return service.getAllSongLists("maxime", 3L);
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
 
 
-        } catch (Exception e) {
-            myLogger.error("An error occurred while fetching song lists: ", e);
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+
+        return service.getAllSongListsVonOwnerObPrivateOderNicht(derAuthentifizierteUser.block());
     }
+
+
 
 }

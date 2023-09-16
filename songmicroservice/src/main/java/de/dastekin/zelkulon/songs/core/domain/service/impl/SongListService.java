@@ -21,6 +21,11 @@ public class SongListService implements ISongListService {
         this.songRepository = songRepository;
     }
 
+    /** //TODO: HARDCODED
+     * @param userId
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> getAllSongLists(String userId, Long id) {
         return new ResponseEntity<>(songListRepository.findByOwnerIdOrIsPrivateOrderById(userId, false), null, 200);
@@ -31,9 +36,12 @@ public class SongListService implements ISongListService {
         return null;
     }
 
+    /*
+        * Get All SongLists aus dem service aufrufen (Eigene Postgresqql native query) ---> SongListRepository
+     */
     @Override
-    public ResponseEntity<?> getAllSongListsByUserId(String userId) {
-        return null;
+    public ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String userId) {
+        return new ResponseEntity<>(songListRepository.getAllSongListOfSpecificOwnerPrivateAndPublic(userId), null, 200);
     }
 
     @Override

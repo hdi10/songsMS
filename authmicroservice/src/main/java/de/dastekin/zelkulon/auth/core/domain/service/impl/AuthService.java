@@ -26,12 +26,11 @@ public class AuthService implements IAuthService {
     @Override
     public ResponseEntity<Object> checkUser(String authToken) {
         User user = userRepository.getUserByToken(authToken);
-        if (user.getUserId() == null || !userRepository.existsByToken(authToken)) {
-            logger.info("Nutzer nicht gefunden mit dem Token: " + authToken);
+        if (user == null || user.getToken() == null || !user.getToken().equals(authToken)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } else {
+            return new ResponseEntity<>(user.getUserId(), HttpStatus.OK);
         }
-        logger.info("Nutzer gefunden mit dem TOKEN: " + authToken);
-        return new ResponseEntity<>(user.getUserId(), HttpStatus.OK);
     }
 
     @Override

@@ -5,6 +5,7 @@
 package de.dastekin.zelkulon.songs.core.domain.service.interfaces;
 
 import de.dastekin.zelkulon.songs.core.domain.model.SongList;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
@@ -15,6 +16,10 @@ public interface SongListRepository extends CrudRepository<SongList, Long> {
     Iterable<SongList> findByOwnerIdOrIsPrivateOrderById(String userId, boolean isPrivate);
     Iterable<SongList> findByOwnerIdAndIsPrivateOrderById(String userId, boolean isPrivate);
     Optional<SongList> findByIdOrderById(Integer id);
+
+    @Query(value = "SELECT * FROM song_list WHERE owner_id = ?1 AND (is_private = true OR is_private = false)", nativeQuery = true)
+    Iterable<SongList> getAllSongListOfSpecificOwnerPrivateAndPublic(String ownerId);
+
 
 
 }
