@@ -208,17 +208,21 @@ public class SongListController extends Authorization {
 
     //Delete
 
+    //TODO: 400 oder 404?!
     @DeleteMapping(value = "/{songListId}")
     public ResponseEntity<?> deleteSongListWithId(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long songListId) {
         Mono<String> derAuthentifizierteUser = authUser(authToken);
         if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(songListId))) {
             if (!service.gibtEsDieSonglisteMitDerID(songListId)) {
+                myLogger.info("Die Songliste existiert nicht");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
+                myLogger.info("Erfolgreich gelöscht");
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            myLogger.info("Der User(aus dem token) ist nicht der Owner der Songliste!");
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
     }
