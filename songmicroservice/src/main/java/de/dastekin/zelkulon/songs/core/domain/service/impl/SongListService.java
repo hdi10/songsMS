@@ -124,7 +124,7 @@ public class SongListService implements ISongListService {
     }
 
     @Override
-    public ResponseEntity<?> deleteSongList(String userId, Long id) {
-        return null;
+    public boolean deleteSongList(String userId, Long id) {
+        return songListRepository.loescheSongListMitIdVonBenutzerMitNamen(userId, id);
     }
 }

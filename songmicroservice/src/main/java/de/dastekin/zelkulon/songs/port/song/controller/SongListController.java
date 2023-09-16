@@ -56,11 +56,11 @@ public class SongListController extends Authorization {
 
 
     /*
-    * Das Hier ist die erste GET Anfrage aus dem Übungsblatt 3
-    * Hier soll ein Get REQUEST mit dem Header Authorization dem @RequestParam (also /songLists?owner_id=...) übergeben werden
-    * token=maxime und liste maxime dann private und public von maxime
-    * token=maxime und liste jane dann nur public von jane
-    * token=maxime und liste von nichtExistentemUser dann 404
+     * Das Hier ist die erste GET Anfrage aus dem Übungsblatt 3
+     * Hier soll ein Get REQUEST mit dem Header Authorization dem @RequestParam (also /songLists?owner_id=...) übergeben werden
+     * token=maxime und liste maxime dann private und public von maxime
+     * token=maxime und liste jane dann nur public von jane
+     * token=maxime und liste von nichtExistentemUser dann 404
      */
     @GetMapping(produces = "application/json")
     public ResponseEntity<?> getAllSongListObPrivateOderNichtVonOwner(@RequestHeader("Authorization") String authToken, @RequestParam(name = "owner_id") String ownerID) {
@@ -69,7 +69,7 @@ public class SongListController extends Authorization {
 
 
         // Mein GUARD
-        if(!service.gibtEsDenUser(ownerID)){
+        if (!service.gibtEsDenUser(ownerID)) {
             myLogger.info("Der User existiert nicht");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -79,8 +79,8 @@ public class SongListController extends Authorization {
          * Wenn der authentifizierte User nicht der Owner ist, dann gib nur die public SongLists zurück
          */
         if (Objects.equals(derAuthentifizierteUser.block(), ownerID)) {
-            return service.getAllSongListsVonOwnerObPrivateOderNicht(derAuthentifizierteUser.block()) ;
-        }else {
+            return service.getAllSongListsVonOwnerObPrivateOderNicht(derAuthentifizierteUser.block());
+        } else {
             return service.getAllSongListVonJemandAnderem(ownerID);
         }
 
@@ -205,4 +205,21 @@ public class SongListController extends Authorization {
         }
     }
 
+
+    //Delete
+
+    @DeleteMapping(value = "/{songListId}")
+    public ResponseEntity<?> deleteSongListWithId(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long songListId) {
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
+        if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(songListId))) {
+            if (!service.gibtEsDieSonglisteMitDerID(songListId)) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }

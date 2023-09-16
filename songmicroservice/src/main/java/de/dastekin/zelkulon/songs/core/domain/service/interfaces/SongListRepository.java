@@ -38,4 +38,7 @@ public interface SongListRepository extends CrudRepository<SongList, Long> {
     @Query(value = "SELECT EXISTS (SELECT 1 FROM song_list WHERE song_list_id = ?1 AND is_private = false)", nativeQuery = true)
     boolean istVerlangteSongListePublic(Long id);
 
+    @Query(value = "DELETE FROM song_list WHERE owner_id = ?1 AND song_list_id = ?2", nativeQuery = true)
+    boolean loescheSongListMitIdVonBenutzerMitNamen(String ownerId, Long id);
+
 }
