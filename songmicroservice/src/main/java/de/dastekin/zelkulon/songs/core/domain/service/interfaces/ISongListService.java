@@ -23,6 +23,16 @@ public interface ISongListService {
 
     boolean gibtEsDenUser(String ownerId);
 
+    boolean gibtEsDieSonglisteMitDerID(Long songListId);
+
+    ResponseEntity<?> gibMirDieSongListeMitDerId(Long songListId);
+
+    String gibMirBitteDenNamenDesBesitzerDerSongListId(Long songListId);
+
+    ResponseEntity<?> gibMirBitteSonglisteMitIdWennPublic(Long songListId);
+
+    boolean istDieseListePublic(Long songListId);
+
     ResponseEntity<?> addSongList(String userId , SongList songList2Add);
 
     ResponseEntity<?> updateSongList(String userId , SongList songList2Update);

@@ -54,6 +54,30 @@ public class SongListService implements ISongListService {
         return songListRepository.gibtEsDenUserUeberhaupt(ownerId);
     }
 
+    @Override
+    public boolean gibtEsDieSonglisteMitDerID(Long songListId) {
+        return songListRepository.gibtEsUeberhauptDieSonglisteMitDerId(songListId);
+    }
+
+    @Override
+    public ResponseEntity<?> gibMirDieSongListeMitDerId(Long songListId) {
+        return new ResponseEntity<>(songListRepository.gibMirDieSongListMitDerId(songListId), null, 200);
+    }
+
+    @Override
+    public String gibMirBitteDenNamenDesBesitzerDerSongListId(Long songListId) {
+        return songListRepository.gibMirBitteDenNamenDesUsersMitDerSongListId(songListId);
+    }
+
+    @Override
+    public ResponseEntity<?> gibMirBitteSonglisteMitIdWennPublic(Long songListId) {
+        return null;
+    }
+
+    @Override
+    public boolean istDieseListePublic(Long songListId) {
+        return songListRepository.istVerlangteSongListePublic(songListId);
+    }
 
     @Override
     public ResponseEntity<?> addSongList(String userId, SongList songList2Add) {

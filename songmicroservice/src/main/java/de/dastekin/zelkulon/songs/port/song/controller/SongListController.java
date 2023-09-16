@@ -53,6 +53,13 @@ public class SongListController extends Authorization {
 //    }
 
 
+    /*
+    * Das Hier ist die erste GET Anfrage aus dem Übungsblatt 3
+    * Hier soll ein Get REQUEST mit dem Header Authorization dem @RequestParam (also /songLists?owner_id=...) übergeben werden
+    * token=maxime und liste maxime dann private und public von maxime
+    * token=maxime und liste jane dann nur public von jane
+    * token=maxime und liste von nichtExistentemUser dann 404
+     */
     @GetMapping(produces = "application/json")
     public ResponseEntity<?> getAllSongListObPrivateOderNichtVonOwner(@RequestHeader("Authorization") String authToken, @RequestParam(name = "owner_id") String ownerID) {
 
@@ -61,6 +68,7 @@ public class SongListController extends Authorization {
 
         // Mein GUARD
         if(!service.gibtEsDenUser(ownerID)){
+            myLogger.info("Der User existiert nicht");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -77,6 +85,96 @@ public class SongListController extends Authorization {
 
     }
 
+
+//    @GetMapping(value = "/{song_list_id}", produces = "application/json")
+//    public ResponseEntity<?> getSongListeMitBestimmterIdAnDenNutzerMitDemToken(@RequestHeader("Authorization") String authToken, @PathVariable("song_list_id") Long songListId) {
+//
+//        Mono<String> derAuthentifizierteUser = authUser(authToken);
+//
+//        // Mein GUARD
+//        if (!service.gibtEsDieSonglisteMitDerID(songListId)) {
+//            myLogger.info("Die Songliste existiert nicht");
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//        /*
+//         * Wenn der authentifizierte User der Owner ist, dann gib alle SongLists zurück, ob private oder nicht
+//         * Wenn der authentifizierte User nicht der Owner ist, dann gib nur die public SongLists zurück
+//         */
+//        if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(songListId))) {
+//            myLogger.info("Der User(token) ist der Owner");
+//            return service.gibMirDieSongListeMitDerId(songListId);
+//        } else {
+//            myLogger.info("Der User(token) ist nicht der Owner");
+//            if (!service.istDieseListePublic(songListId)) {
+//                myLogger.info("Die Songliste ist nicht public"+"der User(token) ");
+//                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//            }else {
+//                myLogger.info("Die Songliste ist public");
+//                return service.gibMirBitteSonglisteMitIdWennPublic(songListId);
+//            }
+//        }
+//    }
+
+    @GetMapping(value = "/{songListId}", produces = "application/json")
+    public ResponseEntity<?> getSongListeMitBestimmterIdAnDenNutzerMitDemToken(
+            @RequestHeader("Authorization") String authToken,
+            @PathVariable("songListId") Long songListId) {
+
+        Mono<String> derAuthentifizierteUser = authUser(authToken);
+
+        // Überprüfung, ob die Songliste existiert
+        if (!gibtEsDieSongliste(songListId)) {
+            logSongListeNichtExistiert();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        String besitzerDerListe = gibBesitzerDerListe(songListId);
+        String aktuellerBenutzer = derAuthentifizierteUser.block();
+
+        // Überprüfung, ob der authentifizierte Benutzer der Besitzer ist
+        if (Objects.equals(aktuellerBenutzer, besitzerDerListe)) {
+            logBenutzerIstBesitzer();
+            return service.gibMirDieSongListeMitDerId(songListId);
+        }
+
+        // Überprüfung, ob die Liste öffentlich ist, wenn der Benutzer nicht der Besitzer ist
+        if (istListeOeffentlich(songListId)) {
+            logListeIstOeffentlich();
+            return service.gibMirDieSongListeMitDerId(songListId);
+        }
+
+        logZugriffVerboten();
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    private boolean gibtEsDieSongliste(Long id) {
+        return service.gibtEsDieSonglisteMitDerID(id);
+    }
+
+    private String gibBesitzerDerListe(Long id) {
+        return service.gibMirBitteDenNamenDesBesitzerDerSongListId(id);
+    }
+
+    private boolean istListeOeffentlich(Long id) {
+        return service.istDieseListePublic(id);
+    }
+
+    private void logSongListeNichtExistiert() {
+        myLogger.info("Die Songliste existiert nicht");
+    }
+
+    private void logBenutzerIstBesitzer() {
+        myLogger.info("Der User(token) ist der Owner");
+    }
+
+    private void logListeIstOeffentlich() {
+        myLogger.info("Die Songliste ist public");
+    }
+
+    private void logZugriffVerboten() {
+        myLogger.info("Die Songliste ist nicht public und der User(token) ist nicht der Owner");
+    }
 
 
 }

@@ -26,4 +26,16 @@ public interface SongListRepository extends CrudRepository<SongList, Long> {
     @Query(value = "SELECT EXISTS (SELECT 1 FROM song_list WHERE owner_id = ?1)", nativeQuery = true)
     boolean gibtEsDenUserUeberhaupt(String ownerId);
 
+    @Query(value = "SELECT * FROM song_list WHERE song_list_id = ?1", nativeQuery = true)
+    Iterable<SongList> gibMirDieSongListMitDerId(Long id);
+
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM song_list WHERE song_list_id = ?1)", nativeQuery = true)
+    boolean gibtEsUeberhauptDieSonglisteMitDerId(Long id);
+
+    @Query(value = "SELECT owner_id FROM song_list WHERE song_list_id = ?1", nativeQuery = true)
+    String gibMirBitteDenNamenDesUsersMitDerSongListId(Long id);
+
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM song_list WHERE song_list_id = ?1 AND is_private = false)", nativeQuery = true)
+    boolean istVerlangteSongListePublic(Long id);
+
 }
