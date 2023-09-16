@@ -186,14 +186,17 @@ public class SongListController extends Authorization {
             @RequestHeader("Authorization") String authToken,
             @RequestBody SongList songList) {
 
-
+        // Guard #1: Token ist leer
         if (authToken == null || authToken.isEmpty()) {
             return new ResponseEntity<>("Unauthorized KEIN TOKEN", HttpStatus.UNAUTHORIZED);
         }
 
+        // Guard #2: TOken ist nicht leer, aber falsch TODO: try-catch für 401?!?!
         try {
+
             Mono<String> derAuthentifizierteUser = authUser(authToken);
             return service.addSongList(derAuthentifizierteUser.block(), songList);
+
         } catch (WebClientResponseException e) {
             if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
                 return new ResponseEntity<>("Unauthorized FALSCHER TOKEN", HttpStatus.UNAUTHORIZED);
