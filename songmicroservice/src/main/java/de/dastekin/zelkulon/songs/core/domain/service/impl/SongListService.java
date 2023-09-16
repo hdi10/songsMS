@@ -40,9 +40,20 @@ public class SongListService implements ISongListService {
         * Get All SongLists aus dem service aufrufen (Eigene Postgresqql native query) ---> SongListRepository
      */
     @Override
-    public ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String userId) {
-        return new ResponseEntity<>(songListRepository.getAllSongListOfSpecificOwnerPrivateAndPublic(userId), null, 200);
+    public ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String ownerId) {
+        return new ResponseEntity<>(songListRepository.getAllSongListOfSpecificOwnerPrivateAndPublic(ownerId), null, 200);
     }
+
+    @Override
+    public ResponseEntity<?> getAllSongListVonJemandAnderem(String ownerId) {
+        return new ResponseEntity<>(songListRepository.getAllSongListVonAnderemUserDiePublicSind(ownerId), null, 200);
+    }
+
+    @Override
+    public boolean gibtEsDenUser(String ownerId) {
+        return songListRepository.gibtEsDenUserUeberhaupt(ownerId);
+    }
+
 
     @Override
     public ResponseEntity<?> addSongList(String userId, SongList songList2Add) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import de.dastekin.zelkulon.songs.Authorization;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -58,8 +59,22 @@ public class SongListController extends Authorization {
         Mono<String> derAuthentifizierteUser = authUser(authToken);
 
 
+        // Mein GUARD
+        if(!service.gibtEsDenUser(ownerID)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return service.getAllSongListsVonOwnerObPrivateOderNicht(derAuthentifizierteUser.block());
+        /*
+         * Wenn der authentifizierte User der Owner ist, dann gib alle SongLists zurück, ob private oder nicht
+         * Wenn der authentifizierte User nicht der Owner ist, dann gib nur die public SongLists zurück
+         */
+        if (Objects.equals(derAuthentifizierteUser.block(), ownerID)) {
+            return service.getAllSongListsVonOwnerObPrivateOderNicht(derAuthentifizierteUser.block()) ;
+        }else {
+            return service.getAllSongListVonJemandAnderem(ownerID);
+        }
+
+
     }
 
 

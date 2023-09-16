@@ -19,6 +19,10 @@ public interface ISongListService {
      */
     ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String userId);
 
+    ResponseEntity<?> getAllSongListVonJemandAnderem(String ownerId);
+
+    boolean gibtEsDenUser(String ownerId);
+
     ResponseEntity<?> addSongList(String userId , SongList songList2Add);
 
     ResponseEntity<?> updateSongList(String userId , SongList songList2Update);
