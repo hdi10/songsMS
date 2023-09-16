@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import de.dastekin.zelkulon.songs.Authorization;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -185,9 +186,20 @@ public class SongListController extends Authorization {
             @RequestHeader("Authorization") String authToken,
             @RequestBody SongList songList) {
 
-        Mono<String> derAuthentifizierteUser = authUser(authToken);
 
-        return service.addSongList(derAuthentifizierteUser.block(), songList);
+        if (authToken == null || authToken.isEmpty()) {
+            return new ResponseEntity<>("Unauthorized KEIN TOKEN", HttpStatus.UNAUTHORIZED);
+        }
+
+        try {
+            Mono<String> derAuthentifizierteUser = authUser(authToken);
+            return service.addSongList(derAuthentifizierteUser.block(), songList);
+        } catch (WebClientResponseException e) {
+            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+                return new ResponseEntity<>("Unauthorized FALSCHER TOKEN", HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
