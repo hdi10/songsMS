@@ -36,15 +36,13 @@ public class SongListController extends Authorization {
             @RequestParam(required = false, name = "userId") Optional<String> userIdSearch4) {
 
         try {
+                // TODD: HIER HARDCODED !!!!!!!!!!!!!!!!!!!
+            //String authorizedUser = String.valueOf(authUser(authToken));
 
-            String authorizedUser = String.valueOf(authUser(authToken));
+                myLogger.info("Fetching all song lists");
+                myLogger.info(service.getAllSongLists("maxime", 3L).toString());
+                return service.getAllSongLists("maxime", 3L);
 
-            if (userIdSearch4.isPresent()) {
-                return service.getSongListByUserId(authorizedUser, userIdSearch4.get());
-            } else {
-                myLogger.info("userIdSearch parameter is null, fetching all song lists.");
-                return service.getAllSongListsByUserId(authorizedUser);
-            }
 
         } catch (Exception e) {
             myLogger.error("An error occurred while fetching song lists: ", e);

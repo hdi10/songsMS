@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="d828ja397pcdtl@ec2-54-73-22-169.eu-west-1.compute.amazonaws.com" uuid="bfd6f1e5-1e9f-4b65-8999-58a0a88ef8dd">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d828ja397pcdtl</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="auth" uuid="85b12721-b502-4c5f-8921-aca63ed42aa5">
+    <data-source source="LOCAL" name="auth" uuid="0097dbf3-bb1d-4181-807a-68471841ec72">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-54-195-120-0.eu-west-1.compute.amazonaws.com:5432/d29qpl30hsva00</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="songs&amp;songlists" uuid="284f3023-79ce-48ab-a8d0-4215b3ff43a0">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d828ja397pcdtl</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

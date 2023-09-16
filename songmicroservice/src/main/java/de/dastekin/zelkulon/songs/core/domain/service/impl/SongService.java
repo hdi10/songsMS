@@ -6,17 +6,16 @@ package de.dastekin.zelkulon.songs.core.domain.service.impl;
 import de.dastekin.zelkulon.songs.core.domain.model.Song;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.dastekin.zelkulon.songs.port.song.exception.ResourceNotFoundException;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.net.URI;
-import java.util.List;
+
 
 @Service
 public class SongService implements ISongService {
@@ -31,9 +30,12 @@ public class SongService implements ISongService {
 
     @Override
     public ResponseEntity<Object> getSongById(Long id) {
-        var song = songRepository.findById(id);
-        if (song.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(song.get(), HttpStatus.OK);
+        try {
+            Song song = songRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Song not found with id: " + id));
+            return new ResponseEntity<>(song, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
