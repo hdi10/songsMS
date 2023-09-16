@@ -10,6 +10,15 @@ Eingabeformat JSON Ausgabeformat
 
 # API
 
+| Endpoint                          | HTTP Method | Status Codes                       |
+|-----------------------------------|-------------|------------------------------------|
+| `/songs/hello` | GET         | 200 (OK)                           |
+| `/songs/`      | GET         | 200 (OK), 404 (NoSongFoundException)|
+| `/songs/`      | POST        | 201 (Created), 400 (BadRequest), 404 (NotFound) |
+| `/songs/{id}`  | GET         | 200 (OK), 404 (ResourceNotFoundException)  |
+| `/songs/{id}`  | PUT         | 204 (No Content), 400 (BadRequest), 404 (NotFound) |
+| `/songs/{id}`  | DELETE      | 204 (No Content), 404 (NotFound)  |
+
 ## Songs
 
 The following table lists the endpoints for the Song API:
