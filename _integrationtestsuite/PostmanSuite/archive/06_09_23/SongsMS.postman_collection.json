@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "19361c89-a35b-4f22-82a9-e25c3403dd48",
 		"name": "SongsMS",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14968172"
 	},
 	"item": [
@@ -11,19 +11,6 @@
 			"item": [
 				{
 					"name": "PostAuth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -45,7 +32,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/songsMS/rest/auth"
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"auth"
+							]
+						}
 					},
 					"response": []
 				}
@@ -56,19 +55,6 @@
 			"item": [
 				{
 					"name": "PostSong Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -78,6 +64,42 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Chinese Food\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/songs?Song=song",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"songs"
+							],
+							"query": [
+								{
+									"key": "Song",
+									"value": "song"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostSong NotAuth",
+					"request": {
+						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"title\": \"Chinese Food\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
@@ -98,128 +120,13 @@
 								"songsMS",
 								"rest",
 								"songs"
-							],
-							"query": [
-								{
-									"key": "Song",
-									"value": "song",
-									"disabled": true
-								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "PostSong NotAuth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"Chinese Food\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/songsMS/rest/songs"
 					},
 					"response": []
 				},
 				{
 					"name": "GetAllSongs Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text"
-							}
-						],
-						"url": "http://localhost:8080/songsWS-zelkulon/rest/songs/all"
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllSongs No Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": "http://localhost:8080/songsWS-zelkulon/rest/songs/all"
-					},
-					"response": []
-				},
-				{
-					"name": "GetSongById Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -230,8 +137,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=1",
-							"protocol": "http",
+							"raw": "localhost:8080/songsMS/rest//songs/all",
 							"host": [
 								"localhost"
 							],
@@ -239,50 +145,27 @@
 							"path": [
 								"songsMS",
 								"rest",
-								"songs"
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null,
-									"disabled": true
-								},
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"",
+								"songs",
+								"all"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetSongById No Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "GetSongById",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
 								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=1",
+							"raw": "http://localhost:8080/songsMS/rest/songs?&id=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -296,8 +179,7 @@
 							"query": [
 								{
 									"key": null,
-									"value": null,
-									"disabled": true
+									"value": null
 								},
 								{
 									"key": "id",
@@ -310,19 +192,6 @@
 				},
 				{
 					"name": "PutSong Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -360,19 +229,6 @@
 				},
 				{
 					"name": "PutSong No Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -411,19 +267,6 @@
 				},
 				{
 					"name": "DeleteSong Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -457,19 +300,6 @@
 				},
 				{
 					"name": "DeleteSong No Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -583,7 +413,20 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/songsMS/rest/songsLists/22"
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/songsLists/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"songsLists",
+								"22"
+							]
+						}
 					},
 					"response": []
 				},
@@ -607,7 +450,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/songsMS/rest/songsLists"
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/songsLists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"songsLists"
+							]
+						}
 					},
 					"response": []
 				},
@@ -631,7 +486,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/songsMS/rest/songsLists"
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/songsLists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"songsLists"
+							]
+						}
 					},
 					"response": []
 				},
@@ -646,7 +513,20 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/songsMS/rest/songsLists/21"
+						"url": {
+							"raw": "http://localhost:8080/songsMS/rest/songsLists/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songsMS",
+								"rest",
+								"songsLists",
+								"21"
+							]
+						}
 					},
 					"response": []
 				}
