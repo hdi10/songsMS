@@ -1,4 +1,32 @@
 
+# Meine Befehel
+
+```sh
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+docker run --name elasticsearch -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+docker ps -a
+docker rm elasticsearch
+```
+
+
+## POST
+man beachte im POST nutze ich den Endpoint
+```sh
+curl --location 'http://localhost:9020/songElastic' \
+--header 'Content-Type: application/json' \
+--data '{
+"title": "Bohemian Rhapsody",
+"artist": "Queen"
+}'
+```
+
+## GET
+man beachte im Model gebe ich den indexName an
+```sh
+curl --location 'http://localhost:9200/songelastic/_search'
+```
+
+------
 ## ✅ Elasticsearch Security Features
 - Elasticsearch security features have been automatically configured!
 - Authentication is enabled and cluster connections are encrypted.
@@ -31,12 +59,4 @@ eyJ2ZXIiOiI4LjkuMiIsImFkciI6WyIxNzIuMjMuMC4yOjkyMDAiXSwiZmdyIjoiZGJjYjNhZWMxMDU4
 If you're running in Docker, copy the enrollment token and run:
 ```bash
 docker run -e "ENROLLMENT_TOKEN=<token>" docker.elastic.co/elasticsearch/elasticsearch:8.9.2
-```
-#Meine Befehel
-
-```sh
-docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.0
-docker run --name elasticsearch -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" docker.elastic.co/elasticsearch/elasticsearch:7.14.0
-docker ps -a
-docker rm elasticsearch
 ```
