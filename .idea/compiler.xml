@@ -15,14 +15,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="apigateway" target="17" />
-      <module name="authmicroservice" target="17" />
-      <module name="modules" target="17" />
-      <module name="serviceregistry" target="17" />
-      <module name="songmicroservice" target="17" />
       <module name="songs" target="17" />
       <module name="SongsZelkulon" target="17" />
-      <module name="zelkulonmicroservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
