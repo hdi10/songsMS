@@ -12,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import de.dastekin.zelkulon.songs.Authorization;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/songLists")
@@ -233,7 +231,13 @@ public class SongListController extends Authorization {
     @PutMapping(value = "/{songListId}", consumes = "application/json")
     public ResponseEntity<?> putSongListWithId1(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList){
         Mono<String> derAuthentifizierteUser = authUser(authToken);
-        return service.updateSongList1(derAuthentifizierteUser.block(), id, songList);
+
+        if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(id))) {
+            return service.updateSongList1(derAuthentifizierteUser.block(), id, songList);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
     }
 
     @PutMapping(value = "/test2/{songListId}", consumes = "application/json")
