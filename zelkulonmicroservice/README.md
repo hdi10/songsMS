@@ -7,7 +7,7 @@ docker run --name elasticsearch -d -p 9200:9200 -p 9300:9300 -e "discovery.type=
 docker ps -a
 docker rm elasticsearch
 ```
-
+https://www.youtube.com/watch?v=eP1BQ_WyuWg
 
 ## POST
 man beachte im POST nutze ich den Endpoint
