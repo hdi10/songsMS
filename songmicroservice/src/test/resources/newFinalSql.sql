@@ -33,9 +33,10 @@ CREATE TABLE song_list
     is_private   BOOLEAN     NOT NULL
 );
 
+-- HINZUGEFÜGT: ON DELETE CASCADE für song_list_id
 CREATE TABLE contains_song
 (
-    song_list_id INTEGER REFERENCES song_list (song_list_id),
+    song_list_id INTEGER REFERENCES song_list (song_list_id) ON DELETE CASCADE,
     song_id      INTEGER REFERENCES song (song_id),
     PRIMARY KEY (song_list_id, song_id)
 );
@@ -96,6 +97,3 @@ VALUES (1, 1),
 
 -- Commit
 COMMIT;
-
-
-
