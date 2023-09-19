@@ -45,7 +45,7 @@ public class SongController extends Authorization {
 
 
 
-            authUser(authHeader);
+            authUser(authHeader).block();
 
             return "Teststring";
         }catch (Exception e){
@@ -65,7 +65,7 @@ public class SongController extends Authorization {
             @RequestHeader(value = "Authorization") String authHeader,
             @PathVariable(value = "id") Long id) {
         try {
-            authUser(authHeader);
+            authUser(authHeader).block();
             return service.getSongById(id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +80,8 @@ public class SongController extends Authorization {
     public ResponseEntity<Object> getAllSongs(
             @RequestHeader(value = "Authorization") String authHeader) {
         try {
-            authUser(authHeader);
+
+            authUser(authHeader).block();
             return service.getAllSongs();
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +125,7 @@ public class SongController extends Authorization {
     addSong(
             @RequestHeader("Authorization") String authToken, @RequestBody Song songToAdd) {
         try {
-            authUser(authToken);
+            authUser(authToken).block();
             return service.postSong(songToAdd);
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,7 +165,7 @@ public class SongController extends Authorization {
             @PathVariable(value = "id") Long id,
             @RequestBody Song songToPut) {
         try {
-            authUser(authToken);
+            authUser(authToken).block();
             return service.updateSong(id, songToPut);
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,21 +201,20 @@ public class SongController extends Authorization {
     //////////      DELETE Methods Start  /////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
-
-
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteSong(
-            @RequestHeader("Authorization") String authToken,
-            @PathVariable(value = "id") Long id) {
-        try {
-            authUser(authToken);
-            return service.deleteSong(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
+    //TODO DELETE MAPPING rausnehmen
+//    @RequestMapping(value = "/{id}",
+//            method = RequestMethod.DELETE)
+//    public ResponseEntity<Object> deleteSong(
+//            @RequestHeader("Authorization") String authToken,
+//            @PathVariable(value = "id") Long id) {
+//        try {
+//            authUser(authToken).block();
+//            return service.deleteSong(id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//    }
 
 /*
 

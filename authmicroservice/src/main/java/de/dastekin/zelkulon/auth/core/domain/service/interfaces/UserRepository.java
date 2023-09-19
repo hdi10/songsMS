@@ -13,6 +13,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "SELECT * FROM user_account WHERE user_id = ?1", nativeQuery = true)
     User selectUserByUserId(String userId);
 
+    /*
+    * Sag mal existiert ein User mit diesem Token in der Datenbank?
+     */
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM user_account WHERE token = ?1)", nativeQuery = true)
+    boolean einUserMitDiesemTokenExistiertInDerDatenBank(String token);
+
     @Query(value = "SELECT * FROM user_account WHERE user_id = ?1 AND password = ?2", nativeQuery = true)
     List<User> authenticateByPassword(String userId, String password);
 

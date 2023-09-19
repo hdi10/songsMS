@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -30,13 +29,7 @@ public class SongMicroserviceMainApplication {
 
 
 
-    /**
-     * Erzeugt ein Bean mit Load-Balancing-Fähigkeiten.
-     * Das RestTemplate ist mit dem @LoadBalanced annotiert,
-     * um automatisches clientseitiges Load-Balancing durch den Ribbon Load-Balancer zu ermöglichen.
-     *
-     * @return eine neue  RestTemplate Instanz mit Load-Balancing-Fähigkeiten
-     */
+
     @Bean
     @LoadBalanced //TODO Loadbalancer rein reaus?
     public WebClient.Builder webClientBuilder() {

@@ -19,6 +19,7 @@ public interface SongRepository extends CrudRepository<Song, Long> {
     @Query(value = "SELECT * FROM song", nativeQuery = true)
     List<Song> getAllSongs();
 
+
     /*@Query(value = "SELECT * FROM songs ", nativeQuery = true)
     List<Song> selectAllSongs();
 

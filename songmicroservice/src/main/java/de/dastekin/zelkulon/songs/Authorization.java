@@ -9,19 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import java.io.Serial;
 
 
-/**
- * Diese abstrakte Klasse dient als Basisklasse für verschiedene
- * Autorisierungsmechanismen.
- *
- * Sie verwendet RestTemplate, um eine externe Authentifizierungs-API
- * für die Benutzerautorisierung anzusprechen.
- */
 @Service
 public abstract class Authorization {
 
@@ -39,28 +30,28 @@ public abstract class Authorization {
                 .uri("http://auth-service:9000/auth")
                 .header("Authorization", authToken)
                 .retrieve()
-                .onStatus(status -> status.is4xxClientError(), response -> {
-                    // Authentifizierungsfehler
-                    return Mono.error(new WebClientResponseException(
-                            "Unauthorized",
-                            401,
-                            "Unauthorized",
-                            null,
-                            null,
-                            null
-                    ));
-                })
-                .onStatus(status -> status.is5xxServerError(), response -> {
-                    // Serverfehler
-                    return Mono.error(new WebClientResponseException(
-                            "Internal Server Error",
-                            500,
-                            "Internal Server Error",
-                            null,
-                            null,
-                            null
-                    ));
-                })
+//                .onStatus(status -> status.is4xxClientError(), response -> {
+//                    // Authentifizierungsfehler
+//                    return Mono.error(new WebClientResponseException(
+//                            "Unauthorized",
+//                            401,
+//                            "Unauthorized",
+//                            null,
+//                            null,
+//                            null
+//                    ));
+//                })
+//                .onStatus(status -> status.is5xxServerError(), response -> {
+//                    // Serverfehler
+//                    return Mono.error(new WebClientResponseException(
+//                            "Internal Server Error",
+//                            500,
+//                            "Internal Server Error",
+//                            null,
+//                            null,
+//                            null
+//                    ));
+//                })
                 .bodyToMono(String.class).doOnNext(response -> log.info(response))
                 .doOnError(error -> log.error("Error during authorization: ", error));
 

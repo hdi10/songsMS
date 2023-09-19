@@ -25,12 +25,19 @@ public class AuthService implements IAuthService {
 
     @Override
     public ResponseEntity<Object> checkUser(String authToken) {
-        User user = userRepository.getUserByToken(authToken);
-        if (user == null || user.getToken() == null || !user.getToken().equals(authToken)) {
+
+        boolean existiertDerUserMitDiesemToken = userRepository.einUserMitDiesemTokenExistiertInDerDatenBank(authToken);
+
+        logger.info("existiert der user mit diesem token? " + existiertDerUserMitDiesemToken);
+
+        if (!existiertDerUserMitDiesemToken) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else {
+            User user = userRepository.getUserByToken(authToken);
             return new ResponseEntity<>(user.getUserId(), HttpStatus.OK);
         }
+
+
     }
 
     @Override
