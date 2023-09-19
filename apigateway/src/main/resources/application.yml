@@ -25,6 +25,12 @@ spring:
           predicates:
             - Path=/auth/**
 
+        ## zelkulon-service ----> http://localhost:8080/zelkulon/ port forwarding auf http://localhost:9020
+        - id: zelkulon-service
+          uri: lb://zelkulon-service
+          predicates:
+            - Path=/songElastic/**
+
 
 server:
   port: 8080
