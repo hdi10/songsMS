@@ -42,4 +42,5 @@ public interface ISongListService {
 
     boolean deleteSongList(String userId , Long id);
 
+    void deleteThisSongList(Long songListId);
 }

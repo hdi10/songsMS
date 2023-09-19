@@ -218,6 +218,7 @@ public class SongListController extends Authorization {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
                 myLogger.info("Erfolgreich gelöscht");
+                service.deleteThisSongList(songListId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         } else {

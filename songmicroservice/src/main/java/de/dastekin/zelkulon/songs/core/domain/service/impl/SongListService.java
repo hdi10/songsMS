@@ -180,4 +180,10 @@ public class SongListService implements ISongListService {
     public boolean deleteSongList(String userId, Long id) {
         return songListRepository.loescheSongListMitIdVonBenutzerMitNamen(userId, id);
     }
+
+    @Override
+    public void deleteThisSongList(Long songListId) {
+        songListRepository.deleteById(songListId);
+    }
+
 }
