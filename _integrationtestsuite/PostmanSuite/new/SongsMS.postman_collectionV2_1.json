@@ -1005,6 +1005,21 @@
 			"item": [
 				{
 					"name": "nichtExistierenden_UserEinloggen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 401, da nicht existender User loggt sich ein\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1024,15 +1039,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/auth",
+							"raw": "http://localhost:8080/auth",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
 								"auth"
 							]
 						}
@@ -1041,6 +1054,27 @@
 				},
 				{
 					"name": "existierenden_UserEinloggen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200, da existenter User loggt sich ein\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const token = pm.response.text();",
+									"",
+									"console.log(\"Received token:\", token);",
+									"",
+									"// Token direkt aus der Antwort als Text speichern",
+									"pm.environment.set(\"fritzToken\", token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1052,18 +1086,32 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \r\n  \"userId\":\"maxime\",\r\n  \"password\":\"pass1234\"\r\n}",
+							"raw": "{  \r\n  \"userId\":\"fritz\",\r\n  \"password\":\"pass1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth"
+							]
 						}
 					},
 					"response": []
 				},
 				{
 					"name": "UserHoltSichEigeneSongListen",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1074,26 +1122,28 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
+								"value": "{{fritzToken}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songsLists?userId=maxime",
+							"raw": "http://localhost:8080/songLists?owner_id=fritz",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songsLists"
+								"songLists"
 							],
 							"query": [
 								{
-									"key": "userId",
-									"value": "maxime"
+									"key": "owner_id",
+									"value": "fritz"
 								}
 							]
 						}
@@ -1102,6 +1152,39 @@
 				},
 				{
 					"name": "UserHoltSichSongListenVonEinerAnderenNutzer_in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response sollte eine JSON sein\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response sollte ein array sein\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(Array.isArray(jsonData)).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Jedes Objekt sollte die passenden Felder besitzen\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    jsonData.forEach((item) => {",
+									"        pm.expect(item).to.have.property(\"id\");",
+									"        pm.expect(item).to.have.property(\"ownerId\");",
+									"        pm.expect(item).to.have.property(\"name\");",
+									"        pm.expect(item).to.have.property(\"songList\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1112,25 +1195,23 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
+								"value": "{{fritzToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songsLists?userId=jane",
+							"raw": "http://localhost:8080/songLists?owner_id=jane",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songsLists"
+								"songLists"
 							],
 							"query": [
 								{
-									"key": "userId",
+									"key": "owner_id",
 									"value": "jane"
 								}
 							]
@@ -1140,6 +1221,20 @@
 				},
 				{
 					"name": "eigeneAktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -1150,31 +1245,24 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
+								"value": "{{fritzToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 10,\r\n  \"title\": \"_Chinese Food_ PutThisOne 1\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}"
+							"raw": "{\r\n\t\"id\": 28,\r\n    \"isPrivate\": true,\r\n\t\"name\": \"FritzsNeuePrivate\",\r\n\t\"songList\": [\r\n\t\t{\r\n\t\t    \"id\": 10,\r\n\t\t\t\"title\": \"Chinese Food\",\r\n\t\t\t\"artist\": \"Alison Gold\",\r\n\t\t\t\"label\": \"PMW Live\",\r\n\t\t\t\"released\": 2013\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": 9,\r\n\t\t\t\"title\": \"My Humps\",\r\n\t\t\t\"artist\": \"Black Eyed Peas\",\r\n\t\t\t\"label\": \"Universal Music\",\r\n\t\t\t\"released\": 2003\r\n\t\t}\r\n\t]\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=1",
+							"raw": "http://localhost:8080/songLists/28",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"songLists",
+								"28"
 							]
 						}
 					},
@@ -1182,6 +1270,21 @@
 				},
 				{
 					"name": "fremdeAktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -1192,31 +1295,24 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
+								"value": "{{fritzToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 10,\r\n  \"title\": \"_Chinese Food_ PutThisOne 1\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}"
+							"raw": "{\r\n\t\"id\": 1,\r\n    \"isPrivate\": true,\r\n\t\"name\": \"MaximesNeuePrivate\",\r\n\t\"songList\": [\r\n\t\t{\r\n\t\t    \"id\": 10,\r\n\t\t\t\"title\": \"Chinese Food\",\r\n\t\t\t\"artist\": \"Alison Gold\",\r\n\t\t\t\"label\": \"PMW Live\",\r\n\t\t\t\"released\": 2013\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": 9,\r\n\t\t\t\"title\": \"My Humps\",\r\n\t\t\t\"artist\": \"Black Eyed Peas\",\r\n\t\t\t\"label\": \"Universal Music\",\r\n\t\t\t\"released\": 2003\r\n\t\t}\r\n\t]\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=1",
+							"raw": "http://localhost:8080/songLists/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"songLists",
+								"1"
 							]
 						}
 					},
@@ -1228,16 +1324,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/zelkulonmicroservice",
+							"raw": "http://localhost:9200/songelastic/_search",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9200",
 							"path": [
-								"songsMS",
-								"rest",
-								"zelkulonmicroservice"
+								"songelastic",
+								"_search"
 							]
 						}
 					},
