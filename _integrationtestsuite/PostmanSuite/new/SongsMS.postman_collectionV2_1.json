@@ -3,7 +3,8 @@
 		"_postman_id": "19361c89-a35b-4f22-82a9-e25c3403dd48",
 		"name": "SongsMS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "14968172"
+		"_exporter_id": "14968172",
+		"_collection_link": "https://cloudy-spaceship-666245.postman.co/workspace/New-Team-Workspace~0288f5bc-e9d5-48b4-8ded-3e6d20ea4271/collection/14968172-19361c89-a35b-4f22-82a9-e25c3403dd48?action=share&source=collection_link&creator=14968172"
 	},
 	"item": [
 		{
@@ -16,9 +17,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status test\", function () {\r",
+									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"const token = pm.response.text();\r",
+									"\r",
+									"console.log(\"Received token:\", token);\r",
+									"\r",
+									"// Token direkt aus der Antwort als Text speichern\r",
+									"pm.environment.set(\"authToken\", token);\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -63,7 +72,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qkanqneoloett",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
@@ -94,119 +103,36 @@
 			"name": "Songs",
 			"item": [
 				{
-					"name": "PostSong Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "iyyyezqqogngc",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"Chinese Food1\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9010/songs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9010",
-							"path": [
-								"songs"
-							],
-							"query": [
-								{
-									"key": "Song",
-									"value": "song",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PostSong NotAuth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"Chinese Food\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"songsMS",
-								"rest",
-								"songs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GetAllSongs Auth",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status test\", function () {\r",
+									"pm.test(\"Status code ist 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Response sollte eine JSON sein\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response sollte ein array sein\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Jedes Objekt sollte die passenden Felder besitzen\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    jsonData.forEach((item) => {\r",
+									"        pm.expect(item).to.have.property(\"id\");\r",
+									"        pm.expect(item).to.have.property(\"title\");\r",
+									"        pm.expect(item).to.have.property(\"artist\");\r",
+									"        pm.expect(item).to.have.property(\"label\");\r",
+									"        pm.expect(item).to.have.property(\"released\");\r",
+									"    });\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -217,7 +143,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "a",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
@@ -243,24 +169,9 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.status(401);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response should be an array\", function () {\r",
-									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Each object in array should have required properties\", function () {\r",
-									"    const jsonData = pm.response.json();\r",
-									"    jsonData.forEach((item) => {\r",
-									"        pm.expect(item).to.have.property(\"id\");\r",
-									"        pm.expect(item).to.have.property(\"title\");\r",
-									"        pm.expect(item).to.have.property(\"artist\");\r",
-									"        pm.expect(item).to.have.property(\"label\");\r",
-									"        pm.expect(item).to.have.property(\"released\");\r",
-									"    });\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -271,23 +182,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
+								"value": "",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs/all",
+							"raw": "http://localhost:8080/songs",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songs",
-								"all"
+								"songs"
 							]
 						}
 					},
@@ -300,9 +207,23 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
+									"pm.test(\"Status code ist 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response sollte eine JSON sein\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Objekt sollte die passenden Felder besitzen\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData).to.have.property(\"title\");\r",
+									"    pm.expect(jsonData).to.have.property(\"artist\");\r",
+									"    pm.expect(jsonData).to.have.property(\"label\");\r",
+									"    pm.expect(jsonData).to.have.property(\"released\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -313,12 +234,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "mwhmidmrmpxar",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songs/15",
+							"raw": "http://localhost:8080/songs/10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -326,7 +247,7 @@
 							"port": "8080",
 							"path": [
 								"songs",
-								"15"
+								"10"
 							],
 							"query": [
 								{
@@ -347,8 +268,9 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -359,21 +281,18 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
+								"value": "dsfs",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=1",
+							"raw": "http://localhost:8080/songs?id=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
 								"songs"
 							],
 							"query": [
@@ -384,8 +303,110 @@
 								},
 								{
 									"key": "id",
-									"value": "1"
+									"value": "5"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostSong Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Chinese Food1\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "Song",
+									"value": "song",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostSong NotAuth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "qwert",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Chinese Food56\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs"
 							]
 						}
 					},
@@ -411,29 +432,29 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"_Chinese Food2\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}"
+							"raw": "{\r\n        \"id\": 10,\r\n        \"title\": \"Chinese Food Hier Neu 3\",\r\n        \"artist\": \"Alison Gold\",\r\n        \"label\": \"PMW Live\",\r\n        \"released\": 2013\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:9010/songs?id=11",
+							"raw": "http://localhost:8080/songs/10",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9010",
+							"port": "8080",
 							"path": [
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "11"
-								}
+								"songs",
+								"10"
 							]
 						}
 					},
@@ -447,8 +468,9 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -459,123 +481,29 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text",
-								"disabled": true
+								"value": "xd1a245",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 10,\r\n  \"title\": \"_Chinese Food\",\r\n  \"artist\": \"Alison Gold\",\r\n  \"label\": \"PMW Live\",\r\n  \"released\": 2013\r\n}"
+							"raw": "{\r\n        \"id\": 11,\r\n        \"title\": \"Chinese FoodNewPutted\",\r\n        \"artist\": \"Alison Gold\",\r\n        \"label\": \"PMW Live\",\r\n        \"released\": 2013\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest//songs?id=10",
+							"raw": "http://localhost:8080/songs/11",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"",
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteSong Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "iyyyezqqogngc",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:9010/songs?id=11",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9010",
-							"path": [
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "11"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteSong No Auth",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "qwertyuiiooxd1a245",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songs?id=12",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"songsMS",
-								"rest",
-								"songs"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "12"
-								}
+								"songs",
+								"11"
 							]
 						}
 					},
@@ -583,12 +511,26 @@
 				},
 				{
 					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "",
+								"value": "{{authToken}}",
 								"type": "text"
 							},
 							{
@@ -620,12 +562,45 @@
 			"item": [
 				{
 					"name": "Get Songlists of Maxime",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response sollte eine JSON sein\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response sollte ein array sein\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(Array.isArray(jsonData)).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Jedes Objekt sollte die passenden Felder besitzen\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    jsonData.forEach((item) => {",
+									"        pm.expect(item).to.have.property(\"id\");",
+									"        pm.expect(item).to.have.property(\"ownerId\");",
+									"        pm.expect(item).to.have.property(\"name\");",
+									"        pm.expect(item).to.have.property(\"songList\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "boiijdmtpdwmc",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
@@ -695,12 +670,45 @@
 				},
 				{
 					"name": "Get Songlists of Jane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response sollte eine JSON sein\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response sollte ein array sein\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(Array.isArray(jsonData)).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Jedes Objekt sollte die passenden Felder besitzen\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    jsonData.forEach((item) => {",
+									"        pm.expect(item).to.have.property(\"id\");",
+									"        pm.expect(item).to.have.property(\"ownerId\");",
+									"        pm.expect(item).to.have.property(\"name\");",
+									"        pm.expect(item).to.have.property(\"songList\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "boiijdmtpdwmc",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
@@ -726,30 +734,43 @@
 				},
 				{
 					"name": "Get Songlists nicht existenter User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "boiijdmtpdwmc",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songsMS/rest/songsLists?userId=someWrong",
+							"raw": "http://localhost:8080/songLists?owner_id=someWrong",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"songsMS",
-								"rest",
-								"songsLists"
+								"songLists"
 							],
 							"query": [
 								{
-									"key": "userId",
+									"key": "owner_id",
 									"value": "someWrong"
 								}
 							]
@@ -759,17 +780,31 @@
 				},
 				{
 					"name": "Get SonglistByID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qkanqneoloett",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songLists/1",
+							"raw": "http://localhost:8080/songLists/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -777,7 +812,7 @@
 							"port": "8080",
 							"path": [
 								"songLists",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -785,18 +820,75 @@
 				},
 				{
 					"name": "Post Songlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response sollte eine JSON sein\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Objekt sollte die passenden Felder besitzen\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"    pm.expect(jsonData).to.have.property(\"ownerId\");",
+									"    pm.expect(jsonData).to.have.property(\"name\");",
+									"    pm.expect(jsonData).to.have.property(\"songList\");",
+									"});",
+									"",
+									"pm.test(\"Location Header sollte die gleiche ID wie im Body enthalten\", function () {",
+									"    // Überprüfen, ob der Location-Header vorhanden ist",
+									"    pm.response.to.have.header(\"Location\");",
+									"    ",
+									"    // Den Wert des Location-Headers abrufen",
+									"    const locationHeader = pm.response.headers.get(\"Location\");",
+									"    ",
+									"    // JSON-Antwortdaten abrufen",
+									"    const jsonData = pm.response.json();",
+									"    ",
+									"    // ID aus dem Antwort-Body abrufen",
+									"    const idInBody = jsonData.id;",
+									"    ",
+									"    // Überprüfen, ob die ID im Location-Header enthalten ist",
+									"    pm.expect(locationHeader).to.include(`/songlists/${idInBody}`);",
+									"});",
+									"",
+									"pm.test(\"Speichert die ID als Environment-Variable\", function () {",
+									"    // JSON-Antwortdaten abrufen",
+									"    const jsonData = pm.response.json();",
+									"    ",
+									"    // ID aus dem Antwort-Body abrufen",
+									"    const idInBody = jsonData.id;",
+									"",
+									"    // Die ID als Environment-Variable setzen",
+									"    pm.environment.set(\"current_songList_id\", idInBody);",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "validToken",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"isPrivate\": true,\r\n\t\"name\": \"JanesPrivate\",\r\n\t\"songList\": [\r\n\t\t{\r\n\t\t    \"id\": 10,\r\n\t\t\t\"title\": \"Chinese Food\",\r\n\t\t\t\"artist\": \"Alison Gold\",\r\n\t\t\t\"label\": \"PMW Live\",\r\n\t\t\t\"released\": 2013\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": 9,\r\n\t\t\t\"title\": \"My Humps\",\r\n\t\t\t\"artist\": \"Black Eyed Peas\",\r\n\t\t\t\"label\": \"Universal Music\",\r\n\t\t\t\"released\": 2003\r\n\t\t}\r\n\t]\r\n}",
+							"raw": "{\r\n\t\"isPrivate\": true,\r\n\t\"name\": \"MaximesPrivate\",\r\n\t\"songList\": [\r\n\t\t{\r\n\t\t    \"id\": 10,\r\n\t\t\t\"title\": \"Chinese Food\",\r\n\t\t\t\"artist\": \"Alison Gold\",\r\n\t\t\t\"label\": \"PMW Live\",\r\n\t\t\t\"released\": 2013\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": 9,\r\n\t\t\t\"title\": \"My Humps\",\r\n\t\t\t\"artist\": \"Black Eyed Peas\",\r\n\t\t\t\"label\": \"Universal Music\",\r\n\t\t\t\"released\": 2003\r\n\t\t}\r\n\t]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -819,18 +911,32 @@
 				},
 				{
 					"name": "Put Songlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "validToken",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 11,\r\n    \"ownerId\": \"jane\",\r\n    \"name\": \"JanesPrivate\",\r\n    \"songList\": [\r\n        {\r\n            \"id\": 9,\r\n            \"title\": \"My Humps\",\r\n            \"artist\": \"Black Eyed Peas\",\r\n            \"label\": \"Universal Music\",\r\n            \"released\": 2003\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"title\": \"Chinese Foody\",\r\n            \"artist\": \"Alison Gold\",\r\n            \"label\": \"PMW Live\",\r\n            \"released\": 2013\r\n        }\r\n    ],\r\n    \"isPrivate\": true\r\n}",
+							"raw": "{\r\n\t\"id\": {{current_songList_id}},\r\n    \"isPrivate\": true,\r\n\t\"name\": \"MaximesNeuePrivate\",\r\n\t\"songList\": [\r\n\t\t{\r\n\t\t    \"id\": 10,\r\n\t\t\t\"title\": \"Chinese Food\",\r\n\t\t\t\"artist\": \"Alison Gold\",\r\n\t\t\t\"label\": \"PMW Live\",\r\n\t\t\t\"released\": 2013\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": 9,\r\n\t\t\t\"title\": \"My Humps\",\r\n\t\t\t\"artist\": \"Black Eyed Peas\",\r\n\t\t\t\"label\": \"Universal Music\",\r\n\t\t\t\"released\": 2003\r\n\t\t}\r\n\t]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -838,7 +944,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/songLists/test2/11",
+							"raw": "http://localhost:8080/songLists/{{current_songList_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -846,8 +952,7 @@
 							"port": "8080",
 							"path": [
 								"songLists",
-								"test2",
-								"11"
+								"{{current_songList_id}}"
 							]
 						}
 					},
@@ -855,17 +960,31 @@
 				},
 				{
 					"name": "Delete Songlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ist 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "qkanqneoloett",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/songLists/9",
+							"raw": "http://localhost:8080/songLists/{{current_songList_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -873,7 +992,7 @@
 							"port": "8080",
 							"path": [
 								"songLists",
-								"9"
+								"{{current_songList_id}}"
 							]
 						}
 					},
