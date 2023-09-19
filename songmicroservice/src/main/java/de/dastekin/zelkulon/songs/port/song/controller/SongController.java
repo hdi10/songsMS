@@ -169,7 +169,7 @@ public class SongController extends Authorization {
 
             logger.info("id: " + id);
             logger.info("songToPut: " + songToPut);
-            logger.info("dieserSuer"+ dieserUser);
+            logger.info("dieser User "+ dieserUser);
 
             ResponseEntity<Object> myResponse = service.updateSong(id, songToPut);
 

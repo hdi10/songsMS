@@ -16,11 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
-
+import java.util.Objects;
+import java.util.logging.Logger;
 
 
 @Service
 public class SongService implements ISongService {
+    Logger logger = Logger.getLogger(SongService.class.getName());
     private final SongRepository songRepository;
     //@Autowired
     //WebClient.Builder webClientBuilder;
@@ -61,9 +63,33 @@ public class SongService implements ISongService {
     public ResponseEntity<Object> updateSong(Long id, Song songToPut) {
 
         Long songId = songToPut.getId().longValue();
+        logger.info("übergebene ID " + id + "mit songToPut.getId() " + songToPut.getId());
+        logger.info("der songtoPut lautet " + songToPut);
+
+        Song songToUpdate = songRepository.selectSongById(id);
+        logger.info("id " + id + "mit songToUpdate.getId() " + songToUpdate.getId());
+        logger.info("songToUpdate " + songToUpdate);
 
         if (songId.equals(id)) {
-            songRepository.save(songToPut);
+
+            if (!Objects.equals(songToUpdate.getTitle(), songToPut.getTitle()) && songToPut.getTitle()!=null) {
+                songToUpdate.setTitle(songToPut.getTitle());
+                logger.info("songToUpdate.getTitle() " + songToUpdate.getTitle());
+                logger.info("songToPut.getTitle() " + songToPut.getTitle());
+
+            }
+            if (!Objects.equals(songToUpdate.getArtist(), songToPut.getArtist()) && songToPut.getArtist()!=null) {
+                songToUpdate.setArtist(songToPut.getArtist());
+            }
+            if (!Objects.equals(songToUpdate.getLabel(), songToPut.getLabel()) && songToPut.getLabel()!=null) {
+                songToUpdate.setLabel(songToPut.getLabel());
+            }
+            if (!Objects.equals(songToUpdate.getReleased(), songToPut.getReleased()) && songToPut.getReleased()!=null) {
+                songToUpdate.setReleased(songToPut.getReleased());
+            }
+
+            songRepository.save(songToUpdate);
+
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
