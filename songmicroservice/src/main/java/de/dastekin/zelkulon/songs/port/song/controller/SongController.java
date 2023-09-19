@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+
 @RestController
 @RequestMapping(value = "/songs")
 public class SongController extends Authorization {
@@ -155,8 +156,7 @@ public class SongController extends Authorization {
     //////////      PUT Methods Start  /////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.PUT,
+   @PutMapping(value = "/{id}",
             consumes = "application/json",
             produces = "application/json")
     public ResponseEntity<Object>
@@ -165,8 +165,17 @@ public class SongController extends Authorization {
             @PathVariable(value = "id") Long id,
             @RequestBody Song songToPut) {
         try {
-            authUser(authToken).block();
-            return service.updateSong(id, songToPut);
+            String dieserUser= authUser(authToken).block();
+
+            logger.info("id: " + id);
+            logger.info("songToPut: " + songToPut);
+            logger.info("dieserSuer"+ dieserUser);
+
+            ResponseEntity<Object> myResponse = service.updateSong(id, songToPut);
+
+            logger.info("myResponse: " + myResponse);
+
+            return myResponse;
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

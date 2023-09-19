@@ -4,6 +4,7 @@
 package de.dastekin.zelkulon.songs.core.domain.service.impl;
 
 import de.dastekin.zelkulon.songs.core.domain.model.Song;
+
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.ISongService;
 import de.dastekin.zelkulon.songs.core.domain.service.interfaces.SongRepository;
 import de.dastekin.zelkulon.songs.port.song.exception.ResourceNotFoundException;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+
 
 
 @Service
@@ -57,35 +59,17 @@ public class SongService implements ISongService {
 
     @Override
     public ResponseEntity<Object> updateSong(Long id, Song songToPut) {
-        var val = songRepository.findById(id);
-        if (val.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        Song song = val.get();
+        Long songId = songToPut.getId().longValue();
 
-        if (songToPut.getId() != null && songToPut.getId().equals(id)) {
-
-            if (songToPut.getTitle() != null && !songToPut.getTitle().isEmpty()) {
-                song.setTitle(songToPut.getTitle());
-            }
-
-            if (songToPut.getArtist() != null) {
-                song.setArtist(songToPut.getArtist());
-            }
-
-            if (songToPut.getLabel() != null) {
-                song.setLabel(songToPut.getLabel());
-            }
-
-            if (songToPut.getReleased() != null) {
-                song.setReleased(songToPut.getReleased());
-            }
-
-            songRepository.save(song);
-
+        if (songId.equals(id)) {
+            songRepository.save(songToPut);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+
     }
 
     @Override
