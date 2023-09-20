@@ -8,6 +8,7 @@ public class SongElastic {
     private String id;
     private String title;
     private String artist;
+    private String releaseYear;
 
     public String getId() {
         return id;
@@ -31,5 +32,13 @@ public class SongElastic {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
     }
 }

@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.miscellaneous.CurrentlyPlaying;
+import se.michaelthelin.spotify.model_objects.specification.AlbumSimplified;
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.player.GetUsersCurrentlyPlayingTrackRequest;
 
 import java.io.IOException;
@@ -29,7 +32,6 @@ public class TestKlasseSpotifyAPI {
             final CurrentlyPlaying currentlyPlaying = getUsersCurrentlyPlayingTrackRequest.execute();
 
 
-            System.out.println("Timestamp: " + currentlyPlaying.getTimestamp());
 
             return currentlyPlaying;
         } catch (IOException | SpotifyWebApiException e) {
@@ -63,8 +65,43 @@ public class TestKlasseSpotifyAPI {
             System.out.println("Async operation cancelled.");
             return null;
         }
+
     }
 
+
+    public String getArtistNameFromCurrentlyPlaying(CurrentlyPlaying currentlyPlaying) {
+        if (currentlyPlaying != null && currentlyPlaying.getItem() != null) {
+            Object item = currentlyPlaying.getItem();
+            if (item instanceof Track) {
+                Track track = (Track) item;
+                ArtistSimplified[] artists = track.getArtists();
+                if (artists != null && artists.length > 0) {
+                    return artists[0].getName();
+                }
+            }
+        }
+        return null; // Rückgabe von null, wenn der Künstlername nicht gefunden werden kann
+    }
+
+    public String getReleaseYearFromCurrentlyPlaying(CurrentlyPlaying currentlyPlaying) {
+        if (currentlyPlaying != null && currentlyPlaying.getItem() != null) {
+            Object item = currentlyPlaying.getItem();
+            if (item instanceof Track) {
+                Track track = (Track) item;
+                AlbumSimplified album = track.getAlbum();
+                if (album != null) {
+                    String releaseDate = album.getReleaseDate();
+                    if (releaseDate != null && !releaseDate.isEmpty()) {
+                        String[] parts = releaseDate.split("-");
+                        if (parts.length > 0) {
+                            return parts[0];  // Das erste Element sollte das Jahr sein
+                        }
+                    }
+                }
+            }
+        }
+        return null;  // Rückgabe von null, wenn das Veröffentlichungsjahr nicht gefunden werden kann
+    }
 
 
 }
