@@ -1,7 +1,5 @@
 package de.dastekin.zelkulon.zelkulon.core.domain.service.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.dastekin.zelkulon.zelkulon.core.domain.model.SongElastic;
 import de.dastekin.zelkulon.zelkulon.core.domain.service.interfaces.SongElasticRepository;
 import org.slf4j.Logger;
@@ -9,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.model_objects.miscellaneous.CurrentlyPlaying;
-
-import java.util.Arrays;
 
 @Service
 public class SongElasticService {
@@ -42,7 +38,7 @@ public class SongElasticService {
         songElastic.setTitle(currentlyPlaying.getItem().getName());
         songElastic.setArtist(testKlasseSpotifyAPI.getArtistNameFromCurrentlyPlaying(currentlyPlaying));
 
-        songElastic.setReleaseYear(testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
+        songElastic.setReleased(testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
 
         saveSong(songElastic);
     }
