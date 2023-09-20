@@ -1344,13 +1344,13 @@
 			"name": "zelkulonMitElastic",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "sample",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Bohemian Rhapsody\",\n    \"artist\": \"Queen\"\n}",
+							"raw": "{\n    \"title\": \"Bohemian Rhapsody\",\n    \"artist\": \"Queen\",\n    \"releaseYear\": \"1975\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1372,7 +1372,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "ElasticSearch",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -1390,6 +1390,381 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "MyCurrentGETSET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9020/saveCurrentPlayingSong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9020",
+							"path": [
+								"saveCurrentPlayingSong"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "currentlyPlayingLogging",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://accounts.spotify.com/authorize?client_id=3373434b15ef4563bef4c04432187fd3&response_type=code&redirect_uri=http://127.0.0.1:8080/api&scope=user-read-playback-state",
+							"protocol": "https",
+							"host": [
+								"accounts",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "3373434b15ef4563bef4c04432187fd3"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://127.0.0.1:8080/api"
+								},
+								{
+									"key": "scope",
+									"value": "user-read-playback-state"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "derReqVonCodeZuAuthToken",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "e118ac56b73a43acac19a6fce5336da2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "3373434b15ef4563bef4c04432187fd3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "AQCs-0K4dSUS5iNBC0Fm-5H5qQUZxt4czmbY2gbLWEqS_94Z_sMDqj35IjaYG8jRyBBVxwdyOOAHmfECzUCywsa_btRyC9uEbzPY7HImRPGLtdyxAtIzQ8HXKEIYQInc7tw5jTDvVCQlABEotc0OiU5qSJyYWZeZpa4rjn-g7GAQLmXc3_YpexCuVP0RfmB3Kxg92FyU_w",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://127.0.0.1:8080/api",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://accounts.spotify.com/api/token",
+							"protocol": "https",
+							"host": [
+								"accounts",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "derReqVonCodeZuAuthToken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "AQB812_ETVcZSZzHw46WWwY7mO4sf9WvOCV7XZgAC6QYs43BJOknxcGrIARAXDKGz0LsTIgyZAvLe9RVETt4_tGmZpJedCP9xeJxHywyyD8hrLVk9KPSM1Sp72DaE1i1aGPAdIV2HN-1NMFBg2DogoncRQJhpM6nzOgnCvOTi5US7B2Mhq1sj9pd12miSO_gSNZaH1pXgg",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://127.0.0.1:8080/api",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://accounts.spotify.com/api/token",
+									"protocol": "https",
+									"host": [
+										"accounts",
+										"spotify",
+										"com"
+									],
+									"path": [
+										"api",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Wed, 20 Sep 2023 09:55:02 GMT"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "sp-trace-id",
+									"value": "dc03966f30ed3a4c"
+								},
+								{
+									"key": "content-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "31"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Via",
+									"value": "HTTP/2 edgeproxy, 1.1 google"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"BQAsTobwmOrR0ZPeQDgutY7Ys9BivyTkvzKsa_tvGcPtDJWNNQrGtCq_ttZnnlSHCMFdxBsGmC-hS8pZcUbOlQMDH44Jj2qrC77-VwMzo7DZ8aaD4ZT3pJx0-dCwdHCA12nR9sX-7F-Uqhrd9w_NlCtb7rFHNefVK-RQkwZgKm7SZWc6PC3eYZGSonYu23xLWAeOOArxXMRovQ\",\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 3600,\n    \"refresh_token\": \"AQDPUcqr7OyqMYJjqE3SgITHMFzBExLpQY6BexFFVaTKPRmxO3eJN27XHqfQ-0lXRbqRlH-4yYvpW2VDLKFPpcycrW6NJGKMPwxRwbYn-8QirMkWh9JOgWBQprbW8n4Dfis\",\n    \"scope\": \"user-read-playback-state\"\n}"
+						}
+					]
+				},
+				{
+					"name": "jetztvonatuZuToken",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer BQD80ChpetphHaKx5J6c-swiMiOK4gfPeniNA-_n8EH1l7_EjRC-zi59oVU6osNDXWnigSciKGweqZmZlOg5kPFECfsFAZZ7tlvPlDCr2Jtvgp9hNpSLTjfee-J4EvZAMKZxNUyE20_PaMdmoXT5DZLcpjSbI-UMRJj-8WaQgRzBI1NM65SLBz1AAO_TOxsGG5FwS64RIsMbww",
+								"type": "text"
+							},
+							{
+								"key": "Value",
+								"value": "Bearer BQAsTobwmOrR0ZPeQDgutY7Ys9BivyTkvzKsa_tvGcPtDJWNNQrGtCq_ttZnnlSHCMFdxBsGmC-hS8pZcUbOlQMDH44Jj2qrC77-VwMzo7DZ8aaD4ZT3pJx0-dCwdHCA12nR9sX-7F-Uqhrd9w_NlCtb7rFHNefVK-RQkwZgKm7SZWc6PC3eYZGSonYu23xLWAeOOArxXMRovQ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://api.spotify.com/v1/me/player/currently-playing",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"me",
+								"player",
+								"currently-playing"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "jetztvonatuZuToken",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer BQAsTobwmOrR0ZPeQDgutY7Ys9BivyTkvzKsa_tvGcPtDJWNNQrGtCq_ttZnnlSHCMFdxBsGmC-hS8pZcUbOlQMDH44Jj2qrC77-VwMzo7DZ8aaD4ZT3pJx0-dCwdHCA12nR9sX-7F-Uqhrd9w_NlCtb7rFHNefVK-RQkwZgKm7SZWc6PC3eYZGSonYu23xLWAeOOArxXMRovQ",
+										"type": "text"
+									},
+									{
+										"key": "Value",
+										"value": "Bearer BQAsTobwmOrR0ZPeQDgutY7Ys9BivyTkvzKsa_tvGcPtDJWNNQrGtCq_ttZnnlSHCMFdxBsGmC-hS8pZcUbOlQMDH44Jj2qrC77-VwMzo7DZ8aaD4ZT3pJx0-dCwdHCA12nR9sX-7F-Uqhrd9w_NlCtb7rFHNefVK-RQkwZgKm7SZWc6PC3eYZGSonYu23xLWAeOOArxXMRovQ",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "https://api.spotify.com/v1/me/player/currently-playing",
+									"protocol": "https",
+									"host": [
+										"api",
+										"spotify",
+										"com"
+									],
+									"path": [
+										"v1",
+										"me",
+										"player",
+										"currently-playing"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "cache-control",
+									"value": "private, max-age=0"
+								},
+								{
+									"key": "x-robots-tag",
+									"value": "noindex, nofollow"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version, X-Cloud-Trace-Context, client-token, content-access-token"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "access-control-max-age",
+									"value": "604800"
+								},
+								{
+									"key": "content-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 20 Sep 2023 09:59:20 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								},
+								{
+									"key": "Via",
+									"value": "HTTP/2 edgeproxy, 1.1 google"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1695203855889,\n    \"context\": {\n        \"external_urls\": {\n            \"spotify\": \"https://open.spotify.com/collection/tracks\"\n        },\n        \"href\": \"https://api.spotify.com/v1/me/tracks\",\n        \"type\": \"collection\",\n        \"uri\": \"spotify:user:20116xrfhhguokphxbdzefpoo:collection\"\n    },\n    \"progress_ms\": 105137,\n    \"item\": {\n        \"album\": {\n            \"album_type\": \"single\",\n            \"artists\": [\n                {\n                    \"external_urls\": {\n                        \"spotify\": \"https://open.spotify.com/artist/2Lg7y5DHmBMrxRI6Y4ThfU\"\n                    },\n                    \"href\": \"https://api.spotify.com/v1/artists/2Lg7y5DHmBMrxRI6Y4ThfU\",\n                    \"id\": \"2Lg7y5DHmBMrxRI6Y4ThfU\",\n                    \"name\": \"Romero\",\n                    \"type\": \"artist\",\n                    \"uri\": \"spotify:artist:2Lg7y5DHmBMrxRI6Y4ThfU\"\n                }\n            ],\n            \"available_markets\": [\n                \"AR\",\n                \"AU\",\n                \"AT\",\n                \"BE\",\n                \"BO\",\n                \"BR\",\n                \"BG\",\n                \"CA\",\n                \"CL\",\n                \"CO\",\n                \"CR\",\n                \"CY\",\n                \"CZ\",\n                \"DK\",\n                \"DO\",\n                \"DE\",\n                \"EC\",\n                \"EE\",\n                \"SV\",\n                \"FI\",\n                \"FR\",\n                \"GR\",\n                \"GT\",\n                \"HN\",\n                \"HK\",\n                \"HU\",\n                \"IS\",\n                \"IE\",\n                \"IT\",\n                \"LV\",\n                \"LT\",\n                \"LU\",\n                \"MY\",\n                \"MT\",\n                \"MX\",\n                \"NL\",\n                \"NZ\",\n                \"NI\",\n                \"NO\",\n                \"PA\",\n                \"PY\",\n                \"PE\",\n                \"PH\",\n                \"PL\",\n                \"PT\",\n                \"SG\",\n                \"SK\",\n                \"ES\",\n                \"SE\",\n                \"CH\",\n                \"TW\",\n                \"TR\",\n                \"UY\",\n                \"US\",\n                \"GB\",\n                \"AD\",\n                \"LI\",\n                \"MC\",\n                \"ID\",\n                \"JP\",\n                \"TH\",\n                \"VN\",\n                \"RO\",\n                \"IL\",\n                \"ZA\",\n                \"SA\",\n                \"AE\",\n                \"BH\",\n                \"QA\",\n                \"OM\",\n                \"KW\",\n                \"EG\",\n                \"MA\",\n                \"DZ\",\n                \"TN\",\n                \"LB\",\n                \"JO\",\n                \"PS\",\n                \"IN\",\n                \"BY\",\n                \"KZ\",\n                \"MD\",\n                \"UA\",\n                \"AL\",\n                \"BA\",\n                \"HR\",\n                \"ME\",\n                \"MK\",\n                \"RS\",\n                \"SI\",\n                \"KR\",\n                \"BD\",\n                \"PK\",\n                \"LK\",\n                \"GH\",\n                \"KE\",\n                \"NG\",\n                \"TZ\",\n                \"UG\",\n                \"AG\",\n                \"AM\",\n                \"BS\",\n                \"BB\",\n                \"BZ\",\n                \"BT\",\n                \"BW\",\n                \"BF\",\n                \"CV\",\n                \"CW\",\n                \"DM\",\n                \"FJ\",\n                \"GM\",\n                \"GE\",\n                \"GD\",\n                \"GW\",\n                \"GY\",\n                \"HT\",\n                \"JM\",\n                \"KI\",\n                \"LS\",\n                \"LR\",\n                \"MW\",\n                \"MV\",\n                \"ML\",\n                \"MH\",\n                \"FM\",\n                \"NA\",\n                \"NR\",\n                \"NE\",\n                \"PW\",\n                \"PG\",\n                \"WS\",\n                \"SM\",\n                \"ST\",\n                \"SN\",\n                \"SC\",\n                \"SL\",\n                \"SB\",\n                \"KN\",\n                \"LC\",\n                \"VC\",\n                \"SR\",\n                \"TL\",\n                \"TO\",\n                \"TT\",\n                \"TV\",\n                \"VU\",\n                \"AZ\",\n                \"BN\",\n                \"BI\",\n                \"KH\",\n                \"CM\",\n                \"TD\",\n                \"KM\",\n                \"GQ\",\n                \"SZ\",\n                \"GA\",\n                \"GN\",\n                \"KG\",\n                \"LA\",\n                \"MO\",\n                \"MR\",\n                \"MN\",\n                \"NP\",\n                \"RW\",\n                \"TG\",\n                \"UZ\",\n                \"ZW\",\n                \"BJ\",\n                \"MG\",\n                \"MU\",\n                \"MZ\",\n                \"AO\",\n                \"CI\",\n                \"DJ\",\n                \"ZM\",\n                \"CD\",\n                \"CG\",\n                \"IQ\",\n                \"LY\",\n                \"TJ\",\n                \"VE\",\n                \"ET\",\n                \"XK\"\n            ],\n            \"external_urls\": {\n                \"spotify\": \"https://open.spotify.com/album/7BUBA636QQxzHhSxTcC2ft\"\n            },\n            \"href\": \"https://api.spotify.com/v1/albums/7BUBA636QQxzHhSxTcC2ft\",\n            \"id\": \"7BUBA636QQxzHhSxTcC2ft\",\n            \"images\": [\n                {\n                    \"height\": 640,\n                    \"url\": \"https://i.scdn.co/image/ab67616d0000b2737aa2c6ebb49a25703d12b11e\",\n                    \"width\": 640\n                },\n                {\n                    \"height\": 300,\n                    \"url\": \"https://i.scdn.co/image/ab67616d00001e027aa2c6ebb49a25703d12b11e\",\n                    \"width\": 300\n                },\n                {\n                    \"height\": 64,\n                    \"url\": \"https://i.scdn.co/image/ab67616d000048517aa2c6ebb49a25703d12b11e\",\n                    \"width\": 64\n                }\n            ],\n            \"name\": \"Nie Mein Shawty\",\n            \"release_date\": \"2022-10-07\",\n            \"release_date_precision\": \"day\",\n            \"total_tracks\": 1,\n            \"type\": \"album\",\n            \"uri\": \"spotify:album:7BUBA636QQxzHhSxTcC2ft\"\n        },\n        \"artists\": [\n            {\n                \"external_urls\": {\n                    \"spotify\": \"https://open.spotify.com/artist/2Lg7y5DHmBMrxRI6Y4ThfU\"\n                },\n                \"href\": \"https://api.spotify.com/v1/artists/2Lg7y5DHmBMrxRI6Y4ThfU\",\n                \"id\": \"2Lg7y5DHmBMrxRI6Y4ThfU\",\n                \"name\": \"Romero\",\n                \"type\": \"artist\",\n                \"uri\": \"spotify:artist:2Lg7y5DHmBMrxRI6Y4ThfU\"\n            }\n        ],\n        \"available_markets\": [\n            \"AR\",\n            \"AU\",\n            \"AT\",\n            \"BE\",\n            \"BO\",\n            \"BR\",\n            \"BG\",\n            \"CA\",\n            \"CL\",\n            \"CO\",\n            \"CR\",\n            \"CY\",\n            \"CZ\",\n            \"DK\",\n            \"DO\",\n            \"DE\",\n            \"EC\",\n            \"EE\",\n            \"SV\",\n            \"FI\",\n            \"FR\",\n            \"GR\",\n            \"GT\",\n            \"HN\",\n            \"HK\",\n            \"HU\",\n            \"IS\",\n            \"IE\",\n            \"IT\",\n            \"LV\",\n            \"LT\",\n            \"LU\",\n            \"MY\",\n            \"MT\",\n            \"MX\",\n            \"NL\",\n            \"NZ\",\n            \"NI\",\n            \"NO\",\n            \"PA\",\n            \"PY\",\n            \"PE\",\n            \"PH\",\n            \"PL\",\n            \"PT\",\n            \"SG\",\n            \"SK\",\n            \"ES\",\n            \"SE\",\n            \"CH\",\n            \"TW\",\n            \"TR\",\n            \"UY\",\n            \"US\",\n            \"GB\",\n            \"AD\",\n            \"LI\",\n            \"MC\",\n            \"ID\",\n            \"JP\",\n            \"TH\",\n            \"VN\",\n            \"RO\",\n            \"IL\",\n            \"ZA\",\n            \"SA\",\n            \"AE\",\n            \"BH\",\n            \"QA\",\n            \"OM\",\n            \"KW\",\n            \"EG\",\n            \"MA\",\n            \"DZ\",\n            \"TN\",\n            \"LB\",\n            \"JO\",\n            \"PS\",\n            \"IN\",\n            \"BY\",\n            \"KZ\",\n            \"MD\",\n            \"UA\",\n            \"AL\",\n            \"BA\",\n            \"HR\",\n            \"ME\",\n            \"MK\",\n            \"RS\",\n            \"SI\",\n            \"KR\",\n            \"BD\",\n            \"PK\",\n            \"LK\",\n            \"GH\",\n            \"KE\",\n            \"NG\",\n            \"TZ\",\n            \"UG\",\n            \"AG\",\n            \"AM\",\n            \"BS\",\n            \"BB\",\n            \"BZ\",\n            \"BT\",\n            \"BW\",\n            \"BF\",\n            \"CV\",\n            \"CW\",\n            \"DM\",\n            \"FJ\",\n            \"GM\",\n            \"GE\",\n            \"GD\",\n            \"GW\",\n            \"GY\",\n            \"HT\",\n            \"JM\",\n            \"KI\",\n            \"LS\",\n            \"LR\",\n            \"MW\",\n            \"MV\",\n            \"ML\",\n            \"MH\",\n            \"FM\",\n            \"NA\",\n            \"NR\",\n            \"NE\",\n            \"PW\",\n            \"PG\",\n            \"WS\",\n            \"SM\",\n            \"ST\",\n            \"SN\",\n            \"SC\",\n            \"SL\",\n            \"SB\",\n            \"KN\",\n            \"LC\",\n            \"VC\",\n            \"SR\",\n            \"TL\",\n            \"TO\",\n            \"TT\",\n            \"TV\",\n            \"VU\",\n            \"AZ\",\n            \"BN\",\n            \"BI\",\n            \"KH\",\n            \"CM\",\n            \"TD\",\n            \"KM\",\n            \"GQ\",\n            \"SZ\",\n            \"GA\",\n            \"GN\",\n            \"KG\",\n            \"LA\",\n            \"MO\",\n            \"MR\",\n            \"MN\",\n            \"NP\",\n            \"RW\",\n            \"TG\",\n            \"UZ\",\n            \"ZW\",\n            \"BJ\",\n            \"MG\",\n            \"MU\",\n            \"MZ\",\n            \"AO\",\n            \"CI\",\n            \"DJ\",\n            \"ZM\",\n            \"CD\",\n            \"CG\",\n            \"IQ\",\n            \"LY\",\n            \"TJ\",\n            \"VE\",\n            \"ET\",\n            \"XK\"\n        ],\n        \"disc_number\": 1,\n        \"duration_ms\": 162000,\n        \"explicit\": false,\n        \"external_ids\": {\n            \"isrc\": \"DEE862201832\"\n        },\n        \"external_urls\": {\n            \"spotify\": \"https://open.spotify.com/track/0rCl2Tq2rctLJaqcv4nzV1\"\n        },\n        \"href\": \"https://api.spotify.com/v1/tracks/0rCl2Tq2rctLJaqcv4nzV1\",\n        \"id\": \"0rCl2Tq2rctLJaqcv4nzV1\",\n        \"is_local\": false,\n        \"name\": \"Nie Mein Shawty\",\n        \"popularity\": 62,\n        \"preview_url\": \"https://p.scdn.co/mp3-preview/a1e31d52efc892d8cbb462cfcb24e8ddae030c3e?cid=3373434b15ef4563bef4c04432187fd3\",\n        \"track_number\": 1,\n        \"type\": \"track\",\n        \"uri\": \"spotify:track:0rCl2Tq2rctLJaqcv4nzV1\"\n    },\n    \"currently_playing_type\": \"track\",\n    \"actions\": {\n        \"disallows\": {\n            \"resuming\": true\n        }\n    },\n    \"is_playing\": true\n}"
+						}
+					]
 				}
 			]
 		}
