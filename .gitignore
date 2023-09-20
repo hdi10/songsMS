@@ -204,3 +204,6 @@ zsdoc/data
 .secret.*
 songsms.secret
 songsms.secret.*
+
+.txt
+.csv
