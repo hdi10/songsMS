@@ -1,5 +1,6 @@
 package de.dastekin.zelkulon.zelkulon;
 
+import de.dastekin.zelkulon.zelkulon.core.domain.service.impl.TestKlasseSpotifyAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ public class ZelkulonMicroserviceMainApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZelkulonMicroserviceMainApplication.class, args);
+
 	}
 
 

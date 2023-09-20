@@ -21,7 +21,7 @@ public class SpotifyConfig {
     private String customIp;
 
     public SpotifyApi getSpotifyObject(){
-        URI redirectUri = SpotifyHttpManager.makeUri(customIp+"api");
+        URI redirectUri = SpotifyHttpManager.makeUri(customIp+"/api/het-user-code/");
 
         return new SpotifyApi.Builder()
                 .setClientId(clientId)
