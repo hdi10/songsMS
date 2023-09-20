@@ -28,6 +28,8 @@ ER Modell
 
 *has*: {[**UserId:string, SongListId:integer**]}
 
+![SongLists_sequenz_diagramm](workOnDrawings/SongListSequenz.png)
+
 # Gliederung
 
 
