@@ -29,7 +29,7 @@ spring:
         - id: zelkulon-service
           uri: lb://zelkulon-service
           predicates:
-            - Path=/songElastic/**
+            - Path=/esong/**
 
 
 server:

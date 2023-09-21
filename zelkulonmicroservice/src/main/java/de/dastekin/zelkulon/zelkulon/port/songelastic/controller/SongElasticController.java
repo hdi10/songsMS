@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value="/esong")
 public class SongElasticController {
     Logger logger = LoggerFactory.getLogger(SongElasticController.class);
 
@@ -23,7 +24,7 @@ public class SongElasticController {
     }
 
 
-    @GetMapping("/saveCurrentPlayingSong")
+    @PostMapping
     public ResponseEntity<?> saveCurrentPlayingSong() {
         try {
             return service.saveCurrentPlayingSong();
@@ -32,10 +33,15 @@ public class SongElasticController {
         }
     }
 
-    @GetMapping("/countByName/{artist}")
+    @GetMapping("/count/{artist}")
     public ResponseEntity<?> countByName(@PathVariable String artist) {
-        logger.info("Count by artist: " + artist);
-       return service.countByArtistName(artist);
+        try {
+            logger.info("Count by artist: " + artist);
+            return service.countByArtistName(artist);
+
+        }catch (Exception e){
+            return new ResponseEntity<>("Unauthorized FALSCHER TOKEN", HttpStatus.UNAUTHORIZED);
+        }
 
     }
 

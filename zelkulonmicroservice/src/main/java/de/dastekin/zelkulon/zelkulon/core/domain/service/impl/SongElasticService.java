@@ -5,9 +5,12 @@ import de.dastekin.zelkulon.zelkulon.core.domain.service.interfaces.SongElasticR
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.model_objects.miscellaneous.CurrentlyPlaying;
+
+import java.net.URI;
 
 @Service
 public class SongElasticService {
@@ -68,9 +71,10 @@ public class SongElasticService {
 
         songElastic.setReleased(testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
 
+
         saveSong(songElastic);
 
-        return new ResponseEntity<>(songElastic, null, 200);
+        return new ResponseEntity<>(songElastic, null,200);
     }
 
 
