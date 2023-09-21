@@ -22,20 +22,20 @@ public class SongElasticController {
     }
 
 
-//    @GetMapping("/saveCurrentPlayingSong")
-//    public ResponseEntity<?> saveCurrentPlayingSong() {
-//        try {
-//            return service.saveCurrentPlayingSong();
-//        }catch (Exception e) {
-//            return new ResponseEntity<>("Unauthorized FALSCHER TOKEN", HttpStatus.UNAUTHORIZED);
-//        }
-//    }
-
     @GetMapping("/saveCurrentPlayingSong")
-    public void saveCurrentPlayingSong() {
-
-        service.saveCurrentPlayingSong();
-
+    public ResponseEntity<?> saveCurrentPlayingSong() {
+        try {
+            return service.saveCurrentPlayingSong();
+        }catch (Exception e) {
+            return new ResponseEntity<>("Unauthorized FALSCHER TOKEN", HttpStatus.UNAUTHORIZED);
+        }
     }
+
+//    @GetMapping("/saveCurrentPlayingSong")
+//    public void saveCurrentPlayingSong() {
+//
+//        service.saveCurrentPlayingSong();
+//
+//    }
 
 }

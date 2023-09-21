@@ -25,30 +25,7 @@ public class SongElasticService {
     }
 
 
-    public void saveCurrentPlayingSong() {
-        // Rufe die Spotify-API auf, um den aktuell abgespielten Song zu erhalten
-        CurrentlyPlaying currentlyPlaying = testKlasseSpotifyAPI.getUsersCurrentlyPlayingTrack_Async();
-
-        // Erstelle ein neues SongElastic-Objekt und speichere es
-        SongElastic songElastic = new SongElastic();
-
-        logger.info("Currently playing track: " + currentlyPlaying.getItem().getName());
-        logger.info("Currently playing artist: " + testKlasseSpotifyAPI.getArtistNameFromCurrentlyPlaying(currentlyPlaying));
-        logger.info("Currently playing label: " + currentlyPlaying.getItem().toString());
-        logger.info("Currently playing released: " + testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
-
-        songElastic.setTitle(currentlyPlaying.getItem().getName());
-        songElastic.setArtist(testKlasseSpotifyAPI.getArtistNameFromCurrentlyPlaying(currentlyPlaying));
-
-        songElastic.setReleased(testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
-
-        saveSong(songElastic);
-
-
-    }
-
-
-//    public ResponseEntity<?> saveCurrentPlayingSong() {
+//    public void saveCurrentPlayingSong() {
 //        // Rufe die Spotify-API auf, um den aktuell abgespielten Song zu erhalten
 //        CurrentlyPlaying currentlyPlaying = testKlasseSpotifyAPI.getUsersCurrentlyPlayingTrack_Async();
 //
@@ -67,8 +44,31 @@ public class SongElasticService {
 //
 //        saveSong(songElastic);
 //
-//        return new ResponseEntity<>(songElastic, null, 200);
+//
 //    }
+
+
+    public ResponseEntity<?> saveCurrentPlayingSong() {
+        // Rufe die Spotify-API auf, um den aktuell abgespielten Song zu erhalten
+        CurrentlyPlaying currentlyPlaying = testKlasseSpotifyAPI.getUsersCurrentlyPlayingTrack_Async();
+
+        // Erstelle ein neues SongElastic-Objekt und speichere es
+        SongElastic songElastic = new SongElastic();
+
+        logger.info("Currently playing track: " + currentlyPlaying.getItem().getName());
+        logger.info("Currently playing artist: " + testKlasseSpotifyAPI.getArtistNameFromCurrentlyPlaying(currentlyPlaying));
+        logger.info("Currently playing label: " + currentlyPlaying.getItem().toString());
+        logger.info("Currently playing released: " + testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
+
+        songElastic.setTitle(currentlyPlaying.getItem().getName());
+        songElastic.setArtist(testKlasseSpotifyAPI.getArtistNameFromCurrentlyPlaying(currentlyPlaying));
+
+        songElastic.setReleased(testKlasseSpotifyAPI.getReleaseYearFromCurrentlyPlaying(currentlyPlaying));
+
+        saveSong(songElastic);
+
+        return new ResponseEntity<>(songElastic, null, 200);
+    }
 
 
 }
