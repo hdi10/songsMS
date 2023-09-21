@@ -24,6 +24,9 @@ public class SongElasticService {
         songElasticRepository.save(songElastic);
     }
 
+    public ResponseEntity<?> countByArtistName(String artist) {
+       return new ResponseEntity<>(songElasticRepository.countByArtist(artist), null, 200);
+    }
 
 //    public void saveCurrentPlayingSong() {
 //        // Rufe die Spotify-API auf, um den aktuell abgespielten Song zu erhalten
