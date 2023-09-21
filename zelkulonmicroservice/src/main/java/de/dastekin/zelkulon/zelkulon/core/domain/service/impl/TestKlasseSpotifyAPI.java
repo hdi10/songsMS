@@ -16,7 +16,7 @@ import java.util.concurrent.CompletionException;
 
 @Service
 public class TestKlasseSpotifyAPI {
-    private static final String accessToken = "BQBynH3A9qsk_VE5MGsQWJiOfBrcc0WSj9vGRnyB20tv7KRPmKcMvbcfQaXvna-4BxLwe54_TLe5V6tNBgyW1t6Qy8onpKXC49Rf-NkeT-fsgcWvP9CMkwyWkbhO_7kWJY_5EzXtARdR2I2exjAYIUmoebNfC7awITmgPTXUW5AzJVX-2iYjy3htPoYyD7t6muSc9qNSGW95fA";
+    private static final String accessToken = "BQDemNnQf47C70nqu1veBQTUNDnBeb-tk_mrAA_InF_R8ERp3om1bTSxLDGJdKH_EU7eHKuH8xiYqIshyd4tsVl6tU1kDYBE2uC0ZuTs4eFbXWWcKF8XzsFIJdxfNZt2OdWcf2u1FCrRxLhr0ddOk9d_oEcDgWuqTZUJYx_enUodtRjaXvl_ktNDb18QCIIaNb4bBCzc7qtDcA";
 
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setAccessToken(accessToken)
