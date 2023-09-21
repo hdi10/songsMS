@@ -41,4 +41,15 @@ public class SongElastic {
     public void setReleased(String released) {
         this.released = released;
     }
+
+
+    @Override
+    public String toString() {
+        return "SongElastic{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", released='" + released + '\'' +
+                '}';
+    }
 }
