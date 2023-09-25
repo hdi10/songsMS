@@ -1394,17 +1394,38 @@
 				{
 					"name": "MyCurrentGETSET",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9020/saveCurrentPlayingSong",
+							"raw": "http://localhost:8080/esong",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9020",
+							"port": "8080",
 							"path": [
-								"saveCurrentPlayingSong"
+								"esong"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCountArtistName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/esong/count/ski",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"esong",
+								"count",
+								"ski"
 							]
 						}
 					},
@@ -1492,7 +1513,7 @@
 								},
 								{
 									"key": "code",
-									"value": "AQCs-0K4dSUS5iNBC0Fm-5H5qQUZxt4czmbY2gbLWEqS_94Z_sMDqj35IjaYG8jRyBBVxwdyOOAHmfECzUCywsa_btRyC9uEbzPY7HImRPGLtdyxAtIzQ8HXKEIYQInc7tw5jTDvVCQlABEotc0OiU5qSJyYWZeZpa4rjn-g7GAQLmXc3_YpexCuVP0RfmB3Kxg92FyU_w",
+									"value": "AQCnLC9IxbcEQDlTdxm1kUEv7c1rRCJJPCnuBF4n3ngrPA52tWhbDGwagIpbyBUgTKaGN4C8y_i9DaN_wpEqZHxNik_95Kn_-jiarQVK_BDXZJz0NNlK89BwK4cbyqsj7778VeMH6xynEGdLBDPKR2XcP4fgkBZdTQw96F_OcmnZrWTjiVFcRa7slLTMnSuk8SBoErJYSg",
 									"type": "text"
 								},
 								{
@@ -1765,6 +1786,39 @@
 							"body": "{\n    \"timestamp\": 1695203855889,\n    \"context\": {\n        \"external_urls\": {\n            \"spotify\": \"https://open.spotify.com/collection/tracks\"\n        },\n        \"href\": \"https://api.spotify.com/v1/me/tracks\",\n        \"type\": \"collection\",\n        \"uri\": \"spotify:user:20116xrfhhguokphxbdzefpoo:collection\"\n    },\n    \"progress_ms\": 105137,\n    \"item\": {\n        \"album\": {\n            \"album_type\": \"single\",\n            \"artists\": [\n                {\n                    \"external_urls\": {\n                        \"spotify\": \"https://open.spotify.com/artist/2Lg7y5DHmBMrxRI6Y4ThfU\"\n                    },\n                    \"href\": \"https://api.spotify.com/v1/artists/2Lg7y5DHmBMrxRI6Y4ThfU\",\n                    \"id\": \"2Lg7y5DHmBMrxRI6Y4ThfU\",\n                    \"name\": \"Romero\",\n                    \"type\": \"artist\",\n                    \"uri\": \"spotify:artist:2Lg7y5DHmBMrxRI6Y4ThfU\"\n                }\n            ],\n            \"available_markets\": [\n                \"AR\",\n                \"AU\",\n                \"AT\",\n                \"BE\",\n                \"BO\",\n                \"BR\",\n                \"BG\",\n                \"CA\",\n                \"CL\",\n                \"CO\",\n                \"CR\",\n                \"CY\",\n                \"CZ\",\n                \"DK\",\n                \"DO\",\n                \"DE\",\n                \"EC\",\n                \"EE\",\n                \"SV\",\n                \"FI\",\n                \"FR\",\n                \"GR\",\n                \"GT\",\n                \"HN\",\n                \"HK\",\n                \"HU\",\n                \"IS\",\n                \"IE\",\n                \"IT\",\n                \"LV\",\n                \"LT\",\n                \"LU\",\n                \"MY\",\n                \"MT\",\n                \"MX\",\n                \"NL\",\n                \"NZ\",\n                \"NI\",\n                \"NO\",\n                \"PA\",\n                \"PY\",\n                \"PE\",\n                \"PH\",\n                \"PL\",\n                \"PT\",\n                \"SG\",\n                \"SK\",\n                \"ES\",\n                \"SE\",\n                \"CH\",\n                \"TW\",\n                \"TR\",\n                \"UY\",\n                \"US\",\n                \"GB\",\n                \"AD\",\n                \"LI\",\n                \"MC\",\n                \"ID\",\n                \"JP\",\n                \"TH\",\n                \"VN\",\n                \"RO\",\n                \"IL\",\n                \"ZA\",\n                \"SA\",\n                \"AE\",\n                \"BH\",\n                \"QA\",\n                \"OM\",\n                \"KW\",\n                \"EG\",\n                \"MA\",\n                \"DZ\",\n                \"TN\",\n                \"LB\",\n                \"JO\",\n                \"PS\",\n                \"IN\",\n                \"BY\",\n                \"KZ\",\n                \"MD\",\n                \"UA\",\n                \"AL\",\n                \"BA\",\n                \"HR\",\n                \"ME\",\n                \"MK\",\n                \"RS\",\n                \"SI\",\n                \"KR\",\n                \"BD\",\n                \"PK\",\n                \"LK\",\n                \"GH\",\n                \"KE\",\n                \"NG\",\n                \"TZ\",\n                \"UG\",\n                \"AG\",\n                \"AM\",\n                \"BS\",\n                \"BB\",\n                \"BZ\",\n                \"BT\",\n                \"BW\",\n                \"BF\",\n                \"CV\",\n                \"CW\",\n                \"DM\",\n                \"FJ\",\n                \"GM\",\n                \"GE\",\n                \"GD\",\n                \"GW\",\n                \"GY\",\n                \"HT\",\n                \"JM\",\n                \"KI\",\n                \"LS\",\n                \"LR\",\n                \"MW\",\n                \"MV\",\n                \"ML\",\n                \"MH\",\n                \"FM\",\n                \"NA\",\n                \"NR\",\n                \"NE\",\n                \"PW\",\n                \"PG\",\n                \"WS\",\n                \"SM\",\n                \"ST\",\n                \"SN\",\n                \"SC\",\n                \"SL\",\n                \"SB\",\n                \"KN\",\n                \"LC\",\n                \"VC\",\n                \"SR\",\n                \"TL\",\n                \"TO\",\n                \"TT\",\n                \"TV\",\n                \"VU\",\n                \"AZ\",\n                \"BN\",\n                \"BI\",\n                \"KH\",\n                \"CM\",\n                \"TD\",\n                \"KM\",\n                \"GQ\",\n                \"SZ\",\n                \"GA\",\n                \"GN\",\n                \"KG\",\n                \"LA\",\n                \"MO\",\n                \"MR\",\n                \"MN\",\n                \"NP\",\n                \"RW\",\n                \"TG\",\n                \"UZ\",\n                \"ZW\",\n                \"BJ\",\n                \"MG\",\n                \"MU\",\n                \"MZ\",\n                \"AO\",\n                \"CI\",\n                \"DJ\",\n                \"ZM\",\n                \"CD\",\n                \"CG\",\n                \"IQ\",\n                \"LY\",\n                \"TJ\",\n                \"VE\",\n                \"ET\",\n                \"XK\"\n            ],\n            \"external_urls\": {\n                \"spotify\": \"https://open.spotify.com/album/7BUBA636QQxzHhSxTcC2ft\"\n            },\n            \"href\": \"https://api.spotify.com/v1/albums/7BUBA636QQxzHhSxTcC2ft\",\n            \"id\": \"7BUBA636QQxzHhSxTcC2ft\",\n            \"images\": [\n                {\n                    \"height\": 640,\n                    \"url\": \"https://i.scdn.co/image/ab67616d0000b2737aa2c6ebb49a25703d12b11e\",\n                    \"width\": 640\n                },\n                {\n                    \"height\": 300,\n                    \"url\": \"https://i.scdn.co/image/ab67616d00001e027aa2c6ebb49a25703d12b11e\",\n                    \"width\": 300\n                },\n                {\n                    \"height\": 64,\n                    \"url\": \"https://i.scdn.co/image/ab67616d000048517aa2c6ebb49a25703d12b11e\",\n                    \"width\": 64\n                }\n            ],\n            \"name\": \"Nie Mein Shawty\",\n            \"release_date\": \"2022-10-07\",\n            \"release_date_precision\": \"day\",\n            \"total_tracks\": 1,\n            \"type\": \"album\",\n            \"uri\": \"spotify:album:7BUBA636QQxzHhSxTcC2ft\"\n        },\n        \"artists\": [\n            {\n                \"external_urls\": {\n                    \"spotify\": \"https://open.spotify.com/artist/2Lg7y5DHmBMrxRI6Y4ThfU\"\n                },\n                \"href\": \"https://api.spotify.com/v1/artists/2Lg7y5DHmBMrxRI6Y4ThfU\",\n                \"id\": \"2Lg7y5DHmBMrxRI6Y4ThfU\",\n                \"name\": \"Romero\",\n                \"type\": \"artist\",\n                \"uri\": \"spotify:artist:2Lg7y5DHmBMrxRI6Y4ThfU\"\n            }\n        ],\n        \"available_markets\": [\n            \"AR\",\n            \"AU\",\n            \"AT\",\n            \"BE\",\n            \"BO\",\n            \"BR\",\n            \"BG\",\n            \"CA\",\n            \"CL\",\n            \"CO\",\n            \"CR\",\n            \"CY\",\n            \"CZ\",\n            \"DK\",\n            \"DO\",\n            \"DE\",\n            \"EC\",\n            \"EE\",\n            \"SV\",\n            \"FI\",\n            \"FR\",\n            \"GR\",\n            \"GT\",\n            \"HN\",\n            \"HK\",\n            \"HU\",\n            \"IS\",\n            \"IE\",\n            \"IT\",\n            \"LV\",\n            \"LT\",\n            \"LU\",\n            \"MY\",\n            \"MT\",\n            \"MX\",\n            \"NL\",\n            \"NZ\",\n            \"NI\",\n            \"NO\",\n            \"PA\",\n            \"PY\",\n            \"PE\",\n            \"PH\",\n            \"PL\",\n            \"PT\",\n            \"SG\",\n            \"SK\",\n            \"ES\",\n            \"SE\",\n            \"CH\",\n            \"TW\",\n            \"TR\",\n            \"UY\",\n            \"US\",\n            \"GB\",\n            \"AD\",\n            \"LI\",\n            \"MC\",\n            \"ID\",\n            \"JP\",\n            \"TH\",\n            \"VN\",\n            \"RO\",\n            \"IL\",\n            \"ZA\",\n            \"SA\",\n            \"AE\",\n            \"BH\",\n            \"QA\",\n            \"OM\",\n            \"KW\",\n            \"EG\",\n            \"MA\",\n            \"DZ\",\n            \"TN\",\n            \"LB\",\n            \"JO\",\n            \"PS\",\n            \"IN\",\n            \"BY\",\n            \"KZ\",\n            \"MD\",\n            \"UA\",\n            \"AL\",\n            \"BA\",\n            \"HR\",\n            \"ME\",\n            \"MK\",\n            \"RS\",\n            \"SI\",\n            \"KR\",\n            \"BD\",\n            \"PK\",\n            \"LK\",\n            \"GH\",\n            \"KE\",\n            \"NG\",\n            \"TZ\",\n            \"UG\",\n            \"AG\",\n            \"AM\",\n            \"BS\",\n            \"BB\",\n            \"BZ\",\n            \"BT\",\n            \"BW\",\n            \"BF\",\n            \"CV\",\n            \"CW\",\n            \"DM\",\n            \"FJ\",\n            \"GM\",\n            \"GE\",\n            \"GD\",\n            \"GW\",\n            \"GY\",\n            \"HT\",\n            \"JM\",\n            \"KI\",\n            \"LS\",\n            \"LR\",\n            \"MW\",\n            \"MV\",\n            \"ML\",\n            \"MH\",\n            \"FM\",\n            \"NA\",\n            \"NR\",\n            \"NE\",\n            \"PW\",\n            \"PG\",\n            \"WS\",\n            \"SM\",\n            \"ST\",\n            \"SN\",\n            \"SC\",\n            \"SL\",\n            \"SB\",\n            \"KN\",\n            \"LC\",\n            \"VC\",\n            \"SR\",\n            \"TL\",\n            \"TO\",\n            \"TT\",\n            \"TV\",\n            \"VU\",\n            \"AZ\",\n            \"BN\",\n            \"BI\",\n            \"KH\",\n            \"CM\",\n            \"TD\",\n            \"KM\",\n            \"GQ\",\n            \"SZ\",\n            \"GA\",\n            \"GN\",\n            \"KG\",\n            \"LA\",\n            \"MO\",\n            \"MR\",\n            \"MN\",\n            \"NP\",\n            \"RW\",\n            \"TG\",\n            \"UZ\",\n            \"ZW\",\n            \"BJ\",\n            \"MG\",\n            \"MU\",\n            \"MZ\",\n            \"AO\",\n            \"CI\",\n            \"DJ\",\n            \"ZM\",\n            \"CD\",\n            \"CG\",\n            \"IQ\",\n            \"LY\",\n            \"TJ\",\n            \"VE\",\n            \"ET\",\n            \"XK\"\n        ],\n        \"disc_number\": 1,\n        \"duration_ms\": 162000,\n        \"explicit\": false,\n        \"external_ids\": {\n            \"isrc\": \"DEE862201832\"\n        },\n        \"external_urls\": {\n            \"spotify\": \"https://open.spotify.com/track/0rCl2Tq2rctLJaqcv4nzV1\"\n        },\n        \"href\": \"https://api.spotify.com/v1/tracks/0rCl2Tq2rctLJaqcv4nzV1\",\n        \"id\": \"0rCl2Tq2rctLJaqcv4nzV1\",\n        \"is_local\": false,\n        \"name\": \"Nie Mein Shawty\",\n        \"popularity\": 62,\n        \"preview_url\": \"https://p.scdn.co/mp3-preview/a1e31d52efc892d8cbb462cfcb24e8ddae030c3e?cid=3373434b15ef4563bef4c04432187fd3\",\n        \"track_number\": 1,\n        \"type\": \"track\",\n        \"uri\": \"spotify:track:0rCl2Tq2rctLJaqcv4nzV1\"\n    },\n    \"currently_playing_type\": \"track\",\n    \"actions\": {\n        \"disallows\": {\n            \"resuming\": true\n        }\n    },\n    \"is_playing\": true\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "TestFürAuthInOtherApp",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/get-user-code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"get-user-code"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
