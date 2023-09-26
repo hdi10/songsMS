@@ -13,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
-
 @RestController
 @RequestMapping(value = "/auth")
 public class UserController {
@@ -28,14 +26,14 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> checkUser(@RequestHeader("Authorization") String authToken) {
+    public ResponseEntity<?> checkUser(@RequestHeader("Authorization") String authToken) {
         logger.info("Auth Token empfangen " + authToken);
         logger.debug("EndPunkt URL : /auth");
         return authService.checkUser(authToken);
     }
 
     @PostMapping
-    public ResponseEntity<Object> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
         return authService.loginUser(user);
     }
 

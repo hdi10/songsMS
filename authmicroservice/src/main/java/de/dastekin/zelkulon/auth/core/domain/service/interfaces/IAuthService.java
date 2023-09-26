@@ -10,16 +10,18 @@ import org.springframework.http.ResponseEntity;
 public interface IAuthService {
 
     /**
-     * Checks if the user is authorized
+     * Prüft ob der User eingeloggt ist
+     *
      * @param authToken - der Token der zur authentication dient
      * @return - der User der eingeloggt ist
      */
-    ResponseEntity<Object>  checkUser(String authToken);
+    ResponseEntity<?> checkUser(String authToken);
 
     /**
-     * Logs in the user
+     * Loggt den User ein
+     *
      * @param user -  der User der eingeloggt werden soll
      * @return - der Token der zur authentication dient
      */
-    ResponseEntity<Object> loginUser(User user);
+    ResponseEntity<?> loginUser(User user);
 }

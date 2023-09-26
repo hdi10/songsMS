@@ -6,7 +6,6 @@ package de.dastekin.zelkulon.auth.core.domain.service.impl;
 import de.dastekin.zelkulon.auth.core.domain.model.User;
 import de.dastekin.zelkulon.auth.core.domain.service.interfaces.IAuthService;
 import de.dastekin.zelkulon.auth.core.domain.service.interfaces.UserRepository;
-import de.dastekin.zelkulon.auth.port.user.controller.UserController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +23,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public ResponseEntity<Object> checkUser(String authToken) {
+    public ResponseEntity<?> checkUser(String authToken) {
 
         boolean existiertDerUserMitDiesemToken = userRepository.einUserMitDiesemTokenExistiertInDerDatenBank(authToken);
 
@@ -41,7 +40,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public ResponseEntity<Object> loginUser(User searchedUser) {
+    public ResponseEntity<?> loginUser(User searchedUser) {
         String searchedUserId = searchedUser.getUserId();
         String searchedUserPw = searchedUser.getPassword();
         User user = userRepository.selectUserByUserId(searchedUserId);

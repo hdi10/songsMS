@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
-
 
 
 @Service
@@ -52,7 +50,8 @@ public abstract class Authorization {
 //                            null
 //                    ));
 //                })
-                .bodyToMono(String.class).doOnNext(response -> log.info(response))
+                .bodyToMono(String.class)
+                .doOnNext(response -> log.info(response))
                 .doOnError(error -> log.error("Error during authorization: ", error));
 
 
