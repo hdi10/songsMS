@@ -1,6 +1,10 @@
 
 # Meine Befehel
 
+Spotify token
+UND
+nicht VERGESSEN ELASTICSEARCH CONTAINER ZU STARTEN
+
 ```sh
 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.0
 docker run --name elasticsearch -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" docker.elastic.co/elasticsearch/elasticsearch:7.14.0
@@ -9,7 +13,6 @@ docker rm elasticsearch
 
 docker stop elasticsearch
 docker start elasticsearch
-
 ```
 https://www.youtube.com/watch?v=eP1BQ_WyuWg
 
