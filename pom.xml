@@ -37,7 +37,6 @@
     </properties>
 
     <dependencies>
-
         <!-- LOG4J Logging -->
         <dependency>
             <groupId>log4j</groupId>
@@ -46,9 +45,11 @@
         </dependency>
 
         <!-- spring data jpa-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>3.1.4</version>
         </dependency>
 
         <!-- spring web -->
@@ -62,17 +63,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.1.4</version>
         </dependency>
 
         <!-- junit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -80,6 +85,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.1.4</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -89,11 +95,11 @@
             </exclusions>
         </dependency>
 
-
         <!-- Postgres -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -101,12 +107,12 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
+            <version>2.7.2</version>
             <scope>runtime</scope>
         </dependency>
-
-
-
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
