@@ -4,13 +4,10 @@
 package de.dastekin.zelkulon.songs.core.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-
 /**
  * Model class for Song
  */
-@Builder
+
 @Entity
 @Table(name = "song")  //table vielleicht doch einfach nur Song nennen
 public class Song {
@@ -92,56 +89,6 @@ public class Song {
         this.released = released;
     }
 
-/*
-    //////////////////////////////////////////////////////////////////////////////////////
-    //////////     my builder    ////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    public static final class Builder {
-        private Integer id;
-        private String title;
-        private String artist;
-        private String label;
-        private Integer released;
-
-        public Builder withId(Integer id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder withTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder withArtist(String artist) {
-            this.artist = artist;
-            return this;
-        }
-
-        public Builder withLabel(String label) {
-            this.label = label;
-            return this;
-        }
-
-        public Builder withReleased(Integer released) {
-            this.released = released;
-            return this;
-        }
-
-        public Song build() {
-            return new Song(this);
-        }
-    }
-
-    private Song(Builder builder) {
-        this.id = builder.id;
-        this.title = builder.title;
-        this.artist = builder.artist;
-        this.label = builder.label;
-        this.released = builder.released;
-    }
-*/
 
     @Override
     public String toString() {

@@ -2,7 +2,6 @@ package de.dastekin.zelkulon.zelkulon.port.songelastic.controller;
 
 import de.dastekin.zelkulon.zelkulon.core.domain.model.SongElastic;
 import de.dastekin.zelkulon.zelkulon.core.domain.service.impl.SongElasticService;
-import de.dastekin.zelkulon.zelkulon.core.domain.service.impl.TestKlasseSpotifyAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

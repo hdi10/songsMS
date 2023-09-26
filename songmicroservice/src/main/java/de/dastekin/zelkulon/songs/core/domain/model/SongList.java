@@ -5,7 +5,6 @@
 package de.dastekin.zelkulon.songs.core.domain.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
