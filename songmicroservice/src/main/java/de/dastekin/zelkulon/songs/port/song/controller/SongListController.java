@@ -29,29 +29,6 @@ public class SongListController extends Authorization {
         this.service = new SongListService(songListRepository, songRepository);
     }
 
-    /*
-     * Get All SongLists aus dem service aufrufen
-     */
-//    @GetMapping(produces = "application/json")
-//    public ResponseEntity<?> getAllSongListsByUserId(
-//            @RequestHeader("Authorization") String authToken,
-//            @RequestParam(required = false, name = "userId") Optional<String> userIdSearch4) {
-//
-//        try {
-//                // TODD: HIER HARDCODED !!!!!!!!!!!!!!!!!!!
-//            //String authorizedUser = String.valueOf(authUser(authToken));
-//
-//                myLogger.info("Fetching all song lists");
-//                myLogger.info(service.getAllSongLists("maxime", 3L).toString());
-//                return service.getAllSongLists("maxime", 3L);
-//
-//
-//        } catch (Exception e) {
-//            myLogger.error("An error occurred while fetching song lists: ", e);
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        }
-//    }
-
 
     /*
      * Das Hier ist die erste GET Anfrage aus dem Übungsblatt 3
@@ -85,36 +62,6 @@ public class SongListController extends Authorization {
 
     }
 
-
-//    @GetMapping(value = "/{song_list_id}", produces = "application/json")
-//    public ResponseEntity<?> getSongListeMitBestimmterIdAnDenNutzerMitDemToken(@RequestHeader("Authorization") String authToken, @PathVariable("song_list_id") Long songListId) {
-//
-//        Mono<String> derAuthentifizierteUser = authUser(authToken);
-//
-//        // Mein GUARD
-//        if (!service.gibtEsDieSonglisteMitDerID(songListId)) {
-//            myLogger.info("Die Songliste existiert nicht");
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//
-//        /*
-//         * Wenn der authentifizierte User der Owner ist, dann gib alle SongLists zurück, ob private oder nicht
-//         * Wenn der authentifizierte User nicht der Owner ist, dann gib nur die public SongLists zurück
-//         */
-//        if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(songListId))) {
-//            myLogger.info("Der User(token) ist der Owner");
-//            return service.gibMirDieSongListeMitDerId(songListId);
-//        } else {
-//            myLogger.info("Der User(token) ist nicht der Owner");
-//            if (!service.istDieseListePublic(songListId)) {
-//                myLogger.info("Die Songliste ist nicht public"+"der User(token) ");
-//                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-//            }else {
-//                myLogger.info("Die Songliste ist public");
-//                return service.gibMirBitteSonglisteMitIdWennPublic(songListId);
-//            }
-//        }
-//    }
 
     @GetMapping(value = "/{songListId}", produces = "application/json")
     public ResponseEntity<?> getSongListeMitBestimmterIdAnDenNutzerMitDemToken(
@@ -189,7 +136,6 @@ public class SongListController extends Authorization {
             return new ResponseEntity<>("Unauthorized KEIN TOKEN", HttpStatus.UNAUTHORIZED);
         }
 
-        // Guard #2: TOken ist nicht leer, aber falsch TODO: try-catch für 401?!?!
         try {
 
             Mono<String> derAuthentifizierteUser = authUser(authToken);
@@ -229,21 +175,16 @@ public class SongListController extends Authorization {
 
     // TODO: StatusCODES Ma Bidde in den Controller und nicht in den Service! Wat willste da mit den StatusCodes?! biste bekloppt meen besta?! :))) heha so rede ich mit mir selbst
     @PutMapping(value = "/{songListId}", consumes = "application/json")
-    public ResponseEntity<?> putSongListWithId1(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList){
+    public ResponseEntity<?> putSongListWithId(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList) {
         Mono<String> derAuthentifizierteUser = authUser(authToken);
 
         if (Objects.equals(derAuthentifizierteUser.block(), service.gibMirBitteDenNamenDesBesitzerDerSongListId(id))) {
-            return service.updateSongList1(derAuthentifizierteUser.block(), id, songList);
+            return service.updateSongList(derAuthentifizierteUser.block(), id, songList);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
     }
 
-    @PutMapping(value = "/test2/{songListId}", consumes = "application/json")
-    public ResponseEntity<?> putSongListWithId2(@RequestHeader("Authorization") String authToken, @PathVariable("songListId") Long id, @RequestBody SongList songList){
-        Mono<String> derAuthentifizierteUser = authUser(authToken);
-        return service.updateSongList2(derAuthentifizierteUser.block(), id, songList);
-    }
 
 }

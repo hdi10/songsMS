@@ -27,23 +27,9 @@ public class SongListService implements ISongListService {
         this.songRepository = songRepository;
     }
 
-    /** //TODO: HARDCODED
-     * @param userId
-     * @param id
-     * @return
-     */
-    @Override
-    public ResponseEntity<?> getAllSongLists(String userId, Long id) {
-        return new ResponseEntity<>(songListRepository.findByOwnerIdOrIsPrivateOrderById(userId, false), null, 200);
-    }
-
-    @Override
-    public ResponseEntity<?> getSongListByUserId(String userId, String userId2Search4) {
-        return null;
-    }
 
     /*
-        * Get All SongLists aus dem service aufrufen (Eigene Postgresqql native query) ---> SongListRepository
+     * Get All SongLists aus dem service aufrufen (Eigene Postgresqql native query) ---> SongListRepository
      */
     @Override
     public ResponseEntity<?> getAllSongListsVonOwnerObPrivateOderNicht(String ownerId) {
@@ -73,11 +59,6 @@ public class SongListService implements ISongListService {
     @Override
     public String gibMirBitteDenNamenDesBesitzerDerSongListId(Long songListId) {
         return songListRepository.gibMirBitteDenNamenDesUsersMitDerSongListId(songListId);
-    }
-
-    @Override
-    public ResponseEntity<?> gibMirBitteSonglisteMitIdWennPublic(Long songListId) {
-        return null;
     }
 
     @Override
@@ -112,17 +93,13 @@ public class SongListService implements ISongListService {
     }
 
 
-
     private boolean doesSongExistInDatabase(Song inputSong, List<Song> allSongs) {
         return allSongs.stream().anyMatch(dbSong -> dbSong.getId().equals(inputSong.getId()));
     }
 
 
-
     @Override
-    public ResponseEntity<?> updateSongList1(String userId, Long id, SongList songList2Update) {
-
-        Iterable<SongList> songList = songListRepository.gibMirDieSongListMitDerId(id);
+    public ResponseEntity<?> updateSongList(String userId, Long id, SongList songList2Update) {
 
         Long songListId = songList2Update.getId().longValue();
 
@@ -134,52 +111,8 @@ public class SongListService implements ISongListService {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-
-
     }
 
-    @Override
-    public ResponseEntity<?> updateSongList2(String userId, Long id, SongList songList2Update) {
-
-        Iterable<SongList> songList = songListRepository.gibMirDieSongListMitDerId(id);
-
-
-        Long songListId = songList2Update.getId().longValue();
-
-        if (songListId.equals(id)) {
-            songList2Update.setOwnerId(userId);
-
-            if(songList2Update.getName() != null) {
-                songList.iterator().next().setName(songList2Update.getName());
-            }
-
-            if(songList2Update.getPrivate() != null) {
-                songList.iterator().next().setPrivate(songList2Update.getPrivate());
-            }
-
-            if (songList2Update.getSongList() != null) {
-                songList.iterator().next().setSongList(songList2Update.getSongList());
-            }
-
-            if (songList2Update.getOwnerId() != null) {
-                songList.iterator().next().setOwnerId(songList2Update.getOwnerId());
-            }
-
-
-
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-
-
-    }
-
-    @Override
-    public boolean deleteSongList(String userId, Long id) {
-        return songListRepository.loescheSongListMitIdVonBenutzerMitNamen(userId, id);
-    }
 
     @Override
     public void deleteThisSongList(Long songListId) {
