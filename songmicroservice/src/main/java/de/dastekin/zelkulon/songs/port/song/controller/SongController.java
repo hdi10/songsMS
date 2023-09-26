@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -41,28 +42,34 @@ public class SongController extends Authorization {
             @PathVariable(value = "id") Long id) {
         try {
             authUser(authHeader).block();
-            return service.getSongById(id);
+            Song song = service.getSongById(id);
+            if(song != null) {
+                return new ResponseEntity<>(song, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
     }
-
 
     @RequestMapping(method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<?> getAllSongs(
             @RequestHeader(value = "Authorization") String authHeader) {
         try {
-
             authUser(authHeader).block();
-            return service.getAllSongs();
+            List<Song> songs = service.getAllSongs();
+            if (songs != null && !songs.isEmpty()) {
+                return new ResponseEntity<>(songs, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
     }
 
 
@@ -73,12 +80,16 @@ public class SongController extends Authorization {
     @RequestMapping(method = RequestMethod.POST,
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity<?>
-    addSong(
+    public ResponseEntity<?> addSong(
             @RequestHeader("Authorization") String authToken, @RequestBody Song songToAdd) {
         try {
             authUser(authToken).block();
-            return service.postSong(songToAdd);
+            Song addedSong = service.postSong(songToAdd);
+            if (addedSong != null) {
+                return new ResponseEntity<>(addedSong, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -93,26 +104,21 @@ public class SongController extends Authorization {
     //////////      PUT Methods Start  /////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
-   @PutMapping(value = "/{id}",
+    @PutMapping(value = "/{id}",
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity<?>
-    updateSong(
+    public ResponseEntity<?> updateSong(
             @RequestHeader("Authorization") String authToken,
             @PathVariable(value = "id") Long id,
             @RequestBody Song songToPut) {
         try {
-            String dieserUser= authUser(authToken).block();
-
-            logger.info("id: " + id);
-            logger.info("songToPut: " + songToPut);
-            logger.info("dieser User "+ dieserUser);
-
-            ResponseEntity<?> myResponse = service.updateSong(id, songToPut);
-
-            logger.info("myResponse: " + myResponse);
-
-            return myResponse;
+            authUser(authToken).block();
+            Song updatedSong = service.updateSong(id, songToPut);
+            if (updatedSong != null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

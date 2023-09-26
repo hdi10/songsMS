@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -33,34 +34,25 @@ public class SongService implements ISongService {
 
 
     @Override
-    public ResponseEntity<?> getSongById(Long id) {
-        try {
-            Song song = songRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Song not found with id: " + id));
-            return new ResponseEntity<>(song, HttpStatus.OK);
-        } catch (ResourceNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public Song getSongById(Long id) {
+        return songRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ResponseEntity<?> getAllSongs(){
-        return new ResponseEntity<>(songRepository.findAll(), HttpStatus.OK);
+    public List<Song> getAllSongs(){
+        return songRepository.getAllSongs();
     }
 
     @Override
-    public ResponseEntity<?> postSong (Song songToAdd) {
+    public Song postSong(Song songToAdd) {
         if (songToAdd.getTitle() != null && !songToAdd.getTitle().isEmpty()) {
-            Song newSong = songRepository.save(songToAdd);
-            HttpHeaders header = new HttpHeaders();
-            header.setLocation(URI.create("/songs/" + newSong.getId()));
-            return new ResponseEntity<>(songToAdd, header, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return songRepository.save(songToAdd);
         }
+        return null;
     }
 
     @Override
-    public ResponseEntity<?> updateSong(Long id, Song songToPut) {
+    public Song updateSong(Long id, Song songToPut) {
 
         Long songId = songToPut.getId().longValue();
         logger.info("übergebene ID " + id + "mit songToPut.getId() " + songToPut.getId());
@@ -90,26 +82,21 @@ public class SongService implements ISongService {
 
             songRepository.save(songToUpdate);
 
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return songToUpdate;
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return null;
         }
 
 
     }
 
     @Override
-    public ResponseEntity<?>  deleteSong (Long id) {
-        var song = songRepository.findById(id);
-        if (song.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        try {
-            songRepository.delete(song.get());
-        } catch (DataIntegrityViolationException e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.LOCKED);
+    public boolean deleteSong(Long id) {
+        if(songRepository.existsById(id)) {
+            songRepository.deleteById(id);
+            return true;
         }
-
-        return ResponseEntity.noContent().build();
+        return false;
     }
 
 
