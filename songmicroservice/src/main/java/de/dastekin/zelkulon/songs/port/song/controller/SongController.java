@@ -29,32 +29,6 @@ public class SongController extends Authorization {
     }
 
 
-    /**
-     * Hello Test Endpoint
-     *
-     * @return "Teststring"
-     */
-    @RequestMapping(value = "/hello1",
-            method = RequestMethod.GET,
-            produces = "text/plain;charset=UTF-8")
-    @ResponseBody
-    String sayHelloToUser(@RequestHeader(value = "Authorization") String authHeader) {
-        try {
-
-
-            logger.info("Er versucht sich einzuloggen mit AuthHeader(TOKEN): " + authHeader);
-
-
-
-            authUser(authHeader).block();
-
-            return "Teststring";
-        }catch (Exception e){
-            e.printStackTrace();
-            return String.valueOf(new ResponseEntity<>(HttpStatus.UNAUTHORIZED));
-        }
-    }
-
     //////////////////////////////////////////////////////////////////////////////
     //////////      GET Methods Start////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -62,7 +36,7 @@ public class SongController extends Authorization {
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Object> getSongById(
+    public ResponseEntity<?> getSongById(
             @RequestHeader(value = "Authorization") String authHeader,
             @PathVariable(value = "id") Long id) {
         try {
@@ -75,10 +49,10 @@ public class SongController extends Authorization {
 
     }
 
-    //TODO STAtus
+
     @RequestMapping(method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Object> getAllSongs(
+    public ResponseEntity<?> getAllSongs(
             @RequestHeader(value = "Authorization") String authHeader) {
         try {
 
@@ -90,29 +64,6 @@ public class SongController extends Authorization {
         }
 
     }
-
-    // TODO: 21.07.2023  GETALL Status übermnehemn!
-    /*@RequestMapping(value = "/all",
-            method = RequestMethod.GET,
-            produces = "application/json;charset=UTF-8"
-    )
-    @ResponseBody
-    ResponseEntity<List<Song>> getAllSongs() {
-        //////if (userController.authenticateUser())-------> TODO: hier weiter mit authenticate Business logic
-        try {
-            List<Song> songs = songsRepository.getAllSongs();
-            if (songs.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(songs, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////
-    //////////      GET Methods END ////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
 
 
     //////////////////////////////////////////////////////////////////////////////
@@ -134,20 +85,6 @@ public class SongController extends Authorization {
         }
     }
 
-   /*
-    // @PostMapping(value = "")
-    @PostMapping("")
-    @ResponseBody
-    ResponseEntity<?> postSong(@RequestBody Song song) {
-        //TODO: authenticate hier rein
-        //TODO: STATUS
-        Song tmpSong = songsRepository.save(song);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Location", "/rest/songs/" + tmpSong.getId());
-        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
-    }
-
-*/
     //////////////////////////////////////////////////////////////////////////////
     //////////      POST Methods END    /////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -181,26 +118,6 @@ public class SongController extends Authorization {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
-
-/*
-
-    /*
-
-    @PutMapping(value = "/{id}")
-    @ResponseBody
-    ResponseEntity<?> updateSong(@PathVariable(value = "id") Long id,
-                                 @RequestBody Song songForUpdate) {
-        //TODO: authenticate hier rein
-        //TODO: STATUS
-        //todo nur erfolgreicH?
-
-        songsRepository.save(songForUpdate);
-        return ResponseEntity.noContent().build();
-
-    }
-*/
-
-
 
     //////////////////////////////////////////////////////////////////////////////
     //////////      PUT Methods END  /////////////////////////////////////////
