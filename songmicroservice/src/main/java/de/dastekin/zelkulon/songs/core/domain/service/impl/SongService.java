@@ -33,7 +33,7 @@ public class SongService implements ISongService {
 
 
     @Override
-    public ResponseEntity<Object> getSongById(Long id) {
+    public ResponseEntity<?> getSongById(Long id) {
         try {
             Song song = songRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Song not found with id: " + id));
             return new ResponseEntity<>(song, HttpStatus.OK);
@@ -43,12 +43,12 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public ResponseEntity<Object> getAllSongs(){
+    public ResponseEntity<?> getAllSongs(){
         return new ResponseEntity<>(songRepository.findAll(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Object> postSong (Song songToAdd) {
+    public ResponseEntity<?> postSong (Song songToAdd) {
         if (songToAdd.getTitle() != null && !songToAdd.getTitle().isEmpty()) {
             Song newSong = songRepository.save(songToAdd);
             HttpHeaders header = new HttpHeaders();
@@ -60,7 +60,7 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public ResponseEntity<Object> updateSong(Long id, Song songToPut) {
+    public ResponseEntity<?> updateSong(Long id, Song songToPut) {
 
         Long songId = songToPut.getId().longValue();
         logger.info("übergebene ID " + id + "mit songToPut.getId() " + songToPut.getId());
@@ -99,7 +99,7 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public ResponseEntity<Object>  deleteSong (Long id) {
+    public ResponseEntity<?>  deleteSong (Long id) {
         var song = songRepository.findById(id);
         if (song.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         try {

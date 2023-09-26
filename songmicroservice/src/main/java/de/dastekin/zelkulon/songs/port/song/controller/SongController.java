@@ -73,7 +73,7 @@ public class SongController extends Authorization {
     @RequestMapping(method = RequestMethod.POST,
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity<Object>
+    public ResponseEntity<?>
     addSong(
             @RequestHeader("Authorization") String authToken, @RequestBody Song songToAdd) {
         try {
@@ -96,7 +96,7 @@ public class SongController extends Authorization {
    @PutMapping(value = "/{id}",
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity<Object>
+    public ResponseEntity<?>
     updateSong(
             @RequestHeader("Authorization") String authToken,
             @PathVariable(value = "id") Long id,
@@ -108,7 +108,7 @@ public class SongController extends Authorization {
             logger.info("songToPut: " + songToPut);
             logger.info("dieser User "+ dieserUser);
 
-            ResponseEntity<Object> myResponse = service.updateSong(id, songToPut);
+            ResponseEntity<?> myResponse = service.updateSong(id, songToPut);
 
             logger.info("myResponse: " + myResponse);
 
@@ -130,7 +130,7 @@ public class SongController extends Authorization {
     //TODO DELETE MAPPING rausnehmen
 //    @RequestMapping(value = "/{id}",
 //            method = RequestMethod.DELETE)
-//    public ResponseEntity<Object> deleteSong(
+//    public ResponseEntity<?> deleteSong(
 //            @RequestHeader("Authorization") String authToken,
 //            @PathVariable(value = "id") Long id) {
 //        try {

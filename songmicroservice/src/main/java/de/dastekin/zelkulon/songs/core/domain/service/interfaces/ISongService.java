@@ -37,7 +37,7 @@ public interface ISongService {
      * 400 - Bad Request if the song could not be added
      * 500 - Internal Server Error if an error occurs
      */
-    ResponseEntity<Object> postSong(Song songToAdd);
+    ResponseEntity<?> postSong(Song songToAdd);
 
     /**
      * Updates a song.
@@ -49,7 +49,7 @@ public interface ISongService {
      * 500 - Internal Server Error if an error occurs
      * 404 - Not Found if the song does not exist
      */
-    ResponseEntity<Object> updateSong(Long id, Song songToPut);
+    ResponseEntity<?> updateSong(Long id, Song songToPut);
 
     /**
      * Deletes a song.
@@ -59,5 +59,5 @@ public interface ISongService {
      * 400 - Bad Request if the song could not be deleted
      * 500 - Internal Server Error if an error occurs
      */
-    ResponseEntity<Object>  deleteSong(Long id);
+    ResponseEntity<?>  deleteSong(Long id);
 }
