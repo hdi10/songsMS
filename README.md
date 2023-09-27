@@ -1,19 +1,22 @@
 
-# Gliederung
+# SongsMS
 
-## [Einleitung](#Einleitung)
+## Gliederung
 
-## [Spring Cloud - Ein Überblick](#spring-cloud---ein-überblick)
+1.  [Einleitung](#Einleitung)
 
-## [Software Architektur Diagramm](#software-architektur-diagramm)
+2. [Spring Cloud - Ein Überblick](#spring-cloud---ein-überblick)
 
-## [#ER-Modell](#er-modell)
+3.  [Software Architektur Diagramm](#software-architektur-diagramm)
+ - [ER-Modell](#er-modell)
+ - [Schema der SongsMS Datenbank](#schema-der-songsms-datenbank)
+ - [Sequenz-Diagramm](#sequenz-diagramm)
 
-## [#Sequenz-Diagramm](#sequenz-diagramm)
+4.  Zelkulon Service as a Service [#ZelSaaS(#ZelSaaS)]
 
-## Zelkulon Service as a Service [#ZelSaaS(#ZelSaaS)]
+5. Ausblick
 
-## Ausblick
+6. Quellenverzeichnis
 
 # Einleitung
 * Diese Projekt besteht aus drei Services
