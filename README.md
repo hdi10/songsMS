@@ -10,7 +10,7 @@ https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spo
 
 Diagramme mit mac programm?????
 
-![Service Diagramm](workOnDrawings/ServiceDiagramm.png)
+![Service Diagramm](workOnDrawings/FinalSoftwareArchitekturDiagramm.png)
 Service Diagramm
 
 ![ER Modell](workOnDrawings/ER-Modell-SongsMS-DB.png)
