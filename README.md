@@ -12,11 +12,9 @@
  - [Schema der SongsMS Datenbank](#schema-der-songsms-datenbank)
  - [Sequenz-Diagramm](#sequenz-diagramm)
 
-4.  Zelkulon Service as a Service [#ZelSaaS(#ZelSaaS)]
+4. [Zeulkulon Microservice](#zelkulon-microservice)
 
-5. Ausblick
-
-6. Quellenverzeichnis
+5. [Quellen](#quellen)
 
 # Einleitung
 * Diese Projekt besteht aus drei Services
@@ -36,27 +34,28 @@
 ![ER Modell](workOnDrawings/ER-Modell-SongsMS-DB.png)
 
 ## Schema der SongsMS Datenbank
-### Entitäten und Attribute
+### Entitäten und Relationen
+
+#### Entitäten:
 *song*: {[**song_id:integer**, title:string, artist:string, label:string, released:integer]}
 
 *song_list*: {[**song_lists_id:integer**, owner_id:string, name:string, is_private:boolean]}
 
 *user_account*: {[**user_id:string**, password:string, first_name:string, last_name:string, token:string]}
-### Relationen
+#### Relationen:
 *contains*: {[**SongListId:integer, SongId:integer**]}
 
 
 ## Sequenz Diagramm
 ![SongLists_sequenz_diagramm](workOnDrawings/SongListSequenz.png)
 
+## Zelkulon Microservice
+![zelkulon_microservice](workOnDrawings/zelkulon.png)
 
 
-## Zelkulon Service as a Service [#ZelSaaS(#ZelSaaS)]
+
+## Quellen
 
 https://spotify-web-api-java.github.io/spotify-web-api-java/se/michaelthelin/spotify/requests/AbstractRequest.html
 
 https://www.elastic.co/de/elasticsearch
-
-
-## Ausblick
-
