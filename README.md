@@ -24,7 +24,6 @@
 * API-Gateway PORT:8080
 
 ## Spring Cloud - Ein Überblick
-<h3 id="spring-cloud---ein-überblick">Spring Cloud - Ein Überblick</h3>
 ![Spring Cloud](workOnDrawings/wasistspringcloud.png)
 
 ## Software Architektur Diagramm
