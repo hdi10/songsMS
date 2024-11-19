@@ -90,3 +90,8 @@ curl -X POST "https://accounts.spotify.com/api/token" \
 -d "grant_type=authorization_code&code=AQCwSKPuKNO10hU4rWbwzOEHlXLR-2J20YRDp7vvygPAjMTPBuwub6KNBmFQga344Xgk0670qh9kiKC4FTHfu78XFDVgGtj2lv6kAz5oMBhD5Oh9qn1stGNns4KO7f5UEjsO9OIPaMtu4Tbmm43I1U-vdPW3AIZIdKAm9byZx0mmTAHwC4AqCEJdDhZPx9hJuSMWr6aCAw&redirect_uri=http://localhost:9020/api"
 ```
 
+ACHTUNG aufpassen mit SCOPE
+
+Achtung einbauen refresh token!
+
+next step Andoid zu spring 
