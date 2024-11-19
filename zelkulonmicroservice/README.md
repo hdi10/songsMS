@@ -67,3 +67,26 @@ If you're running in Docker, copy the enrollment token and run:
 ```bash
 docker run -e "ENROLLMENT_TOKEN=<token>" docker.elastic.co/elasticsearch/elasticsearch:8.9.2
 ```
+
+
+## Was habe ich gemacht-->
+
+https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=user-read-currently-playing
+
+
+```
+https://accounts.spotify.com/authorize?client_id=3373434b15ef4563bef4c04432187fd3&response_type=code&redirect_uri=http://localhost:9020/api&scope=user-read-currently-playing
+```
+
+die antwort in der Browserzeile ist der BEARER TOKEN
+
+
+Dann dieser POST mit dem BEARER, der clientID und dem CLIENT SECRET
+
+```
+curl -X POST "https://accounts.spotify.com/api/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-H "Authorization: Basic $(echo -n '3373434b15ef4563bef4c04432187fd3:DEIN_CLIENT_SECRET' | base64)" \
+-d "grant_type=authorization_code&code=AQCwSKPuKNO10hU4rWbwzOEHlXLR-2J20YRDp7vvygPAjMTPBuwub6KNBmFQga344Xgk0670qh9kiKC4FTHfu78XFDVgGtj2lv6kAz5oMBhD5Oh9qn1stGNns4KO7f5UEjsO9OIPaMtu4Tbmm43I1U-vdPW3AIZIdKAm9byZx0mmTAHwC4AqCEJdDhZPx9hJuSMWr6aCAw&redirect_uri=http://localhost:9020/api"
+```
+
